@@ -11,7 +11,7 @@ public class NoteObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -21,12 +21,12 @@ public class NoteObject : MonoBehaviour
             if(canBePressed){
                 gameObject.SetActive(false);
                 //GameManager.instance.NoteHit();
-                if(Mathf.Abs(transform.position.y - 8) > 0.3){
+                if(Mathf.Abs(transform.position.y - 7) > 0.3){
                     Debug.Log("normal hit");
                     GameManager.instance.NormalHit();
                     Instantiate(hitEffect, transform.position, hitEffect.transform.rotation);
                 }
-                else if(Mathf.Abs(transform.position.y - 8) > 0.15){
+                else if(Mathf.Abs(transform.position.y - 7) > 0.15){
                     Debug.Log("good hit");
                     GameManager.instance.GoodHit();
                     Instantiate(goodEffect, transform.position, goodEffect.transform.rotation);

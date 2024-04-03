@@ -9,7 +9,9 @@ public class GameManager : MonoBehaviour
 {
     public AudioSource song;
     public bool startSong;
-    public BeatScoller beatScoller;
+    public BeatScroller beatScoller;
+    public NoteSpawner noteSpawner;
+
     public static GameManager instance;
 
     public int currentScore;
@@ -36,10 +38,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       Debug.Log("GameManger start!");
        instance = this;
        scoreText.text = "Score: 0";
        currentMultiplier = 1;
-       totalNotes = FindObjectsOfType<NoteObject>().Length;
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
             if(Input.anyKeyDown){
                 startSong = true;
                 beatScoller.hasStarted = true;
+                noteSpawner.hasStarted = true;
                 song.Play();
             }
         }
@@ -59,6 +62,7 @@ public class GameManager : MonoBehaviour
                 goodsText.text = goodHits.ToString();
                 perfectsText.text = perfectHits.ToString();
                 missesText.text = missedHits.ToString();
+                totalNotes = normalHits + goodHits + perfectHits + missedHits;
                 float percentHit = (normalHits + goodHits + perfectHits) / totalNotes * 100f;
                 percentHitText.text = percentHit.ToString("F1") + "%";
 

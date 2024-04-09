@@ -1,114 +1,114 @@
 130.0
-5.189,up
-6.067,up
-6.981,up
-7.948,up
-8.875,up
-9.323,up
-9.739,up
-10.699,up
-11.626,up
-12.565,up
-13.020,up
-13.442,up
-14.467,up
-15.378,up
-16.289,up
-16.731,up
-17.194,up
-17.688,up
-18.148,up
-19.056,up
-20.000,up
-20.408,up
-20.880,up
-21.351,up
-21.839,up
-22.798,up
-23.680,up
-24.150,up
-24.605,up
-25.558,up
-26.502,up
-27.414,up
-27.880,up
-28.356,up
-29.276,up
-30.196,up
-31.164,up
-33.015,up
-34.812,up
-35.817,up
-36.714,up
-37.656,up
-38.615,up
-39.079,up
-39.536,up
-40.470,up
-41.390,up
-42.312,up
-42.774,up
-43.205,up
-44.174,up
-45.084,up
-46.028,up
-46.501,up
-46.932,up
-47.397,up
-47.893,up
-48.795,up
-49.770,up
-50.260,up
-50.693,up
-51.146,up
-51.619,up
-52.521,up
-53.493,up
-53.953,up
-54.400,up
-55.345,up
-56.264,up
-57.183,up
-57.655,up
-58.095,up
-59.025,up
-60.886,up
-61.829,up
-62.775,up
-63.716,up
-64.684,up
-68.330,up
-69.275,up
-70.233,up
-71.168,up
-72.064,up
-72.545,up
-72.984,up
-73.943,up
-74.831,up
-75.799,up
-76.273,up
-76.719,up
-77.645,up
-78.598,up
-79.526,up
-79.973,up
-80.460,up
-80.917,up
-81.395,up
-82.308,up
-83.224,up
-83.715,up
-84.162,up
-84.595,up
-85.059,up
-85.993,up
-86.961,up
-87.433,up
-87.849,up
-88.793,up
-89.664,up
-90.640,up
-91.176,up
-91.639,up
-92.479,up
+5.189, bottom_left
+6.067, top_left
+6.981, left
+7.948, down
+8.875, center
+9.323, down
+9.739, bottom_right
+10.699, left
+11.626, up
+12.565, right
+13.020, down
+13.442, right
+14.467, down
+15.378, bottom_right
+16.289, top_left
+16.731, bottom_left
+17.194, top_right
+17.688, right
+18.148, up
+19.056, bottom_left
+20.000, top_right
+20.408, left
+20.880, top_left
+21.351, bottom_right
+21.839, down
+22.798, right
+23.680, bottom_left
+24.150, top_left
+24.605, up
+25.558, bottom_right
+26.502, top_right
+27.414, down
+27.880, right
+28.356, up
+29.276, left
+30.196, bottom_left
+31.164, top_right
+33.015, bottom_right
+34.812, down
+35.817, top_left
+36.714, up
+37.656, right
+38.615, left
+39.079, bottom_right
+39.536, top_right
+40.470, down
+41.390, top_left
+42.312, bottom_left
+42.774, right
+43.205, left
+44.174, down
+45.084, bottom_right
+46.028, top_right
+46.501, left
+46.932, bottom_left
+47.397, up
+47.893, right
+48.795, down
+49.770, bottom_right
+50.260, top_left
+50.693, left
+51.146, bottom_left
+51.619, right
+52.521, up
+53.493, down
+53.953, bottom_right
+54.400, top_left
+55.345, right
+56.264, bottom_left
+57.183, up
+57.655, left
+58.095, down
+59.025, bottom_right
+60.886, top_left
+61.829, right
+62.775, bottom_left
+63.716, top_right
+64.684, up
+68.330, left
+69.275, down
+70.233, bottom_right
+71.168, top_left
+72.064, right
+72.545, bottom_left
+72.984, up
+73.943, left
+74.831, down
+75.799, top_right
+76.273, bottom_right
+76.719, up
+77.645, left
+78.598, down
+79.526, top_left
+79.973, right
+80.460, bottom_left
+80.917, up
+81.395, left
+82.308, down
+83.224, top_right
+83.715, bottom_right
+84.162, up
+84.595, left
+85.059, down
+85.993, right
+86.961, bottom_left
+87.433, up
+87.849, left
+88.793, down
+89.664, top_right
+90.640, bottom_right
+91.176, up
+91.639, right
+92.479, down

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Ports;
 using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,9 @@ public class GameManager : MonoBehaviour
     public GameObject resultsScreen;
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
 
+    static SerialPort serialPort = new("COM10", 9600);   
+    static KeyCode keyToPress = KeyCode.None;
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +46,14 @@ public class GameManager : MonoBehaviour
        instance = this;
        scoreText.text = "Score: 0";
        currentMultiplier = 1;
+
+        if (serialPort.IsOpen) {
+            serialPort.Close();
+        }
+        serialPort.Open();
+        if(serialPort.IsOpen){
+            Debug.Log("Serial port is open!");
+        }
     }
 
     // Update is called once per frame
@@ -86,7 +98,37 @@ public class GameManager : MonoBehaviour
                 finalScoreText.text = currentScore.ToString();
             }
         }
+        ArduinoToKeyVal();
     }
+
+    public void ArduinoToKeyVal(){
+        serialPort.ReadTimeout = 1;
+        serialPort.DtrEnable = true;
+
+        try{
+            string dataFromArduinoString = serialPort.ReadLine();
+            int keyCodeValue;
+            if (int.TryParse(dataFromArduinoString, out keyCodeValue)){
+                keyToPress = (KeyCode) keyCodeValue;
+            }
+            else{
+                keyToPress = KeyCode.None;
+            }
+        }
+        catch (TimeoutException e){
+
+        }
+    }
+
+    public static KeyCode GetKeyVal(){
+        return keyToPress;
+    }
+
+    /*public static void ResetKeyVal(){
+        keyToPress = KeyCode.None;
+    }
+*/
+
 
     public void NoteHit(){
         Debug.Log("Hit on time");

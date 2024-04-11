@@ -22,34 +22,18 @@ public class ButtonController : MonoBehaviour
     void Update()
     {
         KeyCode key = GameManager.GetKeyVal();
-        Debug.Log("Button controller key: " + key);
-        if(Input.GetKeyDown(key)){
+        //CHANGE THIS LINE FOR THE BUTTON
+        if(Input.GetKeyDown(keyToPress)){
+        //if(key == keyToPress){
+            Debug.Log(key + " pressed down");
             spriteRenderer.sprite = pressedImage;
         }    
-        if(Input.GetKeyUp(key)){
+        //CHANGE THIS LINE FOR THE BUTTON
+        if(Input.GetKeyUp(keyToPress)){
+        //else{
+        //if(key != keyToPress){
+            Debug.Log(key + " key off");
             spriteRenderer.sprite = defaultImage;
         }
-            //string dataFromArduinoString = serialPort.ReadLine();
-            //Debug.Log("Data from Arduino: " + dataFromArduinoString);
-        
-        
-        //Debug.Log(dataFromArduinoString);
-        
-        /*int keyCodeValue;
-        
-        if (int.TryParse(dataFromArduinoString, out keyCodeValue))
-        {
-            KeyCode keyToPress = (KeyCode)keyCodeValue;
-            Debug.Log(keyToPress);
-            if(Input.GetKeyDown(keyToPress)){
-                spriteRenderer.sprite = pressedImage;
-            }    
-            if(Input.GetKeyUp(keyToPress)){
-                spriteRenderer.sprite = defaultImage;
-            }
-        }
-        else{
-            Debug.LogError("Failed to parse Arduino data to KeyCode.");
-        }*/
     }
 }

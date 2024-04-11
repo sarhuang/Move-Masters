@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 35647d0dbc52f98418a423557ac0426a, type: 3}
   pressedImage: {fileID: 21300000, guid: 0ad99470eb7599f4386956b90ba985d2, type: 3}
-  keyToPress: 258
+  keyToPress: 102
 --- !u!61 &42740292
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 1d1f162df61e1fa44b709838240f38f1, type: 3}
   pressedImage: {fileID: 21300000, guid: 54dae70090caac747a62adb3a83ed3f0, type: 3}
-  keyToPress: 264
+  keyToPress: 104
 --- !u!61 &335185283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 0dccd52ae578b5e4c89916bcd02fe097, type: 3}
   pressedImage: {fileID: 21300000, guid: e1fe9dab96a1b0f43bdb5c1a22eb12fd, type: 3}
-  keyToPress: 265
+  keyToPress: 107
 --- !u!212 &342725138
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: e96af9546f3f66a4b8f0468b5a2aa92f, type: 3}
   pressedImage: {fileID: 21300000, guid: 155539b4faa0e7e4a86c8a98cf401d2a, type: 3}
-  keyToPress: 260
+  keyToPress: 100
 --- !u!61 &450328918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: ac209b67fbd9a7a45a21361fe55f1583, type: 3}
   pressedImage: {fileID: 21300000, guid: 7f20bb39f7bd0e94988172186c5ee835, type: 3}
-  keyToPress: 263
+  keyToPress: 115
 --- !u!212 &669511749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2285,7 +2285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: a8a4ab025f382ff43b00a90b0fe3f40c, type: 3}
   pressedImage: {fileID: 21300000, guid: d5b3ff4699cf0834b9bf3135f32aa026, type: 3}
-  keyToPress: 259
+  keyToPress: 108
 --- !u!212 &1473461009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2783,7 +2783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 4e451b61b656c5148a35aca540f2646b, type: 3}
   pressedImage: {fileID: 21300000, guid: 77ce2c7fd53d30049a6a59ba472e02ab, type: 3}
-  keyToPress: 257
+  keyToPress: 97
 --- !u!212 &1763878128
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2957,7 +2957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 76e19580922549b4a962a2e17a2ac3fd, type: 3}
   pressedImage: {fileID: 21300000, guid: 83af22b0bbc0e0d409f1e44948eb1d77, type: 3}
-  keyToPress: 261
+  keyToPress: 103
 --- !u!212 &1785406555
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3348,7 +3348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 34abf748078ee4f45b2fa86863e613aa, type: 3}
   pressedImage: {fileID: 21300000, guid: 16ad88bbf9edb644f9edc11a7185a30e, type: 3}
-  keyToPress: 262
+  keyToPress: 106
 --- !u!61 &1954822629
 BoxCollider2D:
   m_ObjectHideFlags: 0

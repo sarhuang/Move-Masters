@@ -5,7 +5,7 @@ public class EffectObject : MonoBehaviour
 {
     public float lifetime = 0.25f;
     public float inflationDuration = 0.1f;
-    public float maxScale = 1.5f;
+    public float maxScale = 2.0f;
 
     void Start()
     {

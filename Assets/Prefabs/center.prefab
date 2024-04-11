@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
-  keyToPress: 261
+  keyToPress: 103
   hitEffect: {fileID: 3202241268239483412, guid: a9c108db752c37c43a5286d32efbbe01, type: 3}
   goodEffect: {fileID: 7205048065337510128, guid: ec9ca10af8646454fb34caa2a1c81e92, type: 3}
   perfectEffect: {fileID: 8726644223223191180, guid: 048ad860ef2396f42ba3606c31d46236, type: 3}

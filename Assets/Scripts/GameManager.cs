@@ -107,8 +107,8 @@ public class GameManager : MonoBehaviour
 
         try{
             string dataFromArduinoString = serialPort.ReadLine();
-            int keyCodeValue;
-            if (int.TryParse(dataFromArduinoString, out keyCodeValue)){
+            char keyCodeValue;
+            if (char.TryParse(dataFromArduinoString, out keyCodeValue)){
                 keyToPress = (KeyCode) keyCodeValue;
             }
             else{
@@ -116,18 +116,12 @@ public class GameManager : MonoBehaviour
             }
         }
         catch (TimeoutException e){
-
         }
     }
 
     public static KeyCode GetKeyVal(){
         return keyToPress;
     }
-
-    /*public static void ResetKeyVal(){
-        keyToPress = KeyCode.None;
-    }
-*/
 
 
     public void NoteHit(){

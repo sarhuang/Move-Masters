@@ -17,10 +17,12 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        KeyCode key = GameManager.GetKeyVal();
+        //CHANGE THIS LINE FOR THE BUTTON
         if(Input.GetKeyDown(keyToPress)){
+        //if(key == keyToPress){ 
             if(canBePressed){
                 gameObject.SetActive(false);
-                //GameManager.instance.NoteHit();
                 if(Mathf.Abs(transform.position.y - 7) > 0.3){
                     Debug.Log("normal hit");
                     GameManager.instance.NormalHit();

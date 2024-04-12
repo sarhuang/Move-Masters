@@ -1,5 +1,5 @@
 Alphabet Song
-alphabet.txt
+alphabet
 IMAGE LINK
 SONG LINK
 0

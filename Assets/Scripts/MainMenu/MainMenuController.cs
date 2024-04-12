@@ -14,6 +14,8 @@ public class MainMenuController : MonoBehaviour
     LinkedList<AnimatedObject> animatedObjects;
     List<AnimatedObject> finishedAnimations;
     List<SongPanel> allSongs;
+    int songSelectionIndex = 0;
+    readonly int songDisplacement = 400; //Distance between song panels
 
     void Start() {
         Vector2 titleStartPos = new Vector2(TitleText.transform.position.x, TitleText.transform.position.y+400);
@@ -28,6 +30,51 @@ public class MainMenuController : MonoBehaviour
 
         AnimateTranslateObject(TitleText.gameObject, titleStartPos, titleEndPos, 2f);
         LoadAllSongs();
+    }
+
+    void Update() {
+        bool animFinished;
+        finishedAnimations.Clear();
+
+        //Update any animations we currently have
+        foreach (AnimatedObject ao in animatedObjects) {
+            animFinished = ao.UpdateAnimationFrame();
+            if (animFinished) {
+                finishedAnimations.Add(ao);
+            }
+        }
+
+        //Remove any finished animations from the linked list
+        foreach (AnimatedObject ao in finishedAnimations) {
+            animatedObjects.Remove(ao);
+        }
+
+        //TODO: Replace this with serial input from the board
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            ChangeSongSelection(songSelectionIndex+1);
+        } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            ChangeSongSelection(songSelectionIndex-1);
+        }
+    }
+
+    //Changes the current song panel on the song selection page
+    void ChangeSongSelection(int index) {
+        SongPanel song;
+
+        if (index < 0) return;
+        if (index >= allSongs.Count) return;
+
+        songSelectionIndex = index;
+        for (int i = 0; i < allSongs.Count; i++) {
+            song = allSongs[i];
+            if (songSelectionIndex == i) {
+                SetSongPanelInFocus(song);
+            } else {
+                SetSongPanelOutOfFocus(song);
+            }
+
+            song.transform.localPosition = new Vector2((i-songSelectionIndex)*songDisplacement, 0);
+        }
     }
 
     void LoadAllSongs() {
@@ -53,30 +100,32 @@ public class MainMenuController : MonoBehaviour
 
             CreateSongPanel(songName, songLocation, imageLocation);
         }
+
+        //SetSongDisplayPosition();
+        ChangeSongSelection(0);
+    }
+
+    void SetSongPanelInFocus(SongPanel song) {
+        song.transform.localScale = new Vector3(1f, 1f, 1f);
+        song.SetPanelFade(0.4f);
+        song.SetImageFade(1f);
+        song.SetSongNameFade(1f);
+        song.SetButtonState(true);
+    }
+
+    void SetSongPanelOutOfFocus(SongPanel song) {
+        song.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        song.SetPanelFade(0.1f);
+        song.SetImageFade(0.5f);
+        song.SetSongNameFade(0.5f);
+        song.SetButtonState(false);
     }
 
     void CreateSongPanel(string songName, string songLocation, string imageLocation) {
         SongPanel songPanel = Instantiate(SongPanelRef, SongSelectionScreen.transform).GetComponent<SongPanel>();
         songPanel.SetSongName(songName);
         songPanel.SetSongLocation(songLocation);
-    }
-
-    void Update() {
-        bool animFinished;
-        finishedAnimations.Clear();
-
-        //Update any animations we currently have
-        foreach (AnimatedObject ao in animatedObjects) {
-            animFinished = ao.UpdateAnimationFrame();
-            if (animFinished) {
-                finishedAnimations.Add(ao);
-            }
-        }
-
-        //Remove any finished animations from the linked list
-        foreach (AnimatedObject ao in finishedAnimations) {
-            animatedObjects.Remove(ao);
-        }
+        allSongs.Add(songPanel);
     }
 
     public void QuitGame() {

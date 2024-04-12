@@ -434,6 +434,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SongNameText: {fileID: 2996838507203969550}
+  PanelRef: {fileID: 6319975786239610740}
+  ImageRef: {fileID: 4449603514783860972}
+  ButtonRef: {fileID: 7895025962512018156}
 --- !u!1 &6090071977664427961
 GameObject:
   m_ObjectHideFlags: 0

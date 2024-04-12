@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Activator
+  - NoteSpawner
   layers:
   - Default
   - TransparentFX

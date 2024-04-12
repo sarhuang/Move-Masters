@@ -35,40 +35,55 @@ public class GameManager : MonoBehaviour
     public GameObject resultsScreen;
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
 
-    static SerialPort serialPort = new("COM10", 9600);   
+    static SerialPort serialPort = new("COM10", 9600);
+    static bool serialPortError = false;
     static KeyCode keyToPress = KeyCode.None;
 
 
     // Start is called before the first frame update
     void Start()
     {
-       Debug.Log("GameManger start!");
-       instance = this;
-       scoreText.text = "Score: 0";
-       currentMultiplier = 1;
+        Debug.Log("GameManger start!");
+        instance = this;
+        scoreText.text = "Score: 0";
+        currentMultiplier = 1;
 
-        if (serialPort.IsOpen) {
-            serialPort.Close();
+        try
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
+            }
+            serialPort.Open();
+            if (serialPort.IsOpen)
+            {
+                Debug.Log("Serial port is open!");
+            }
         }
-        serialPort.Open();
-        if(serialPort.IsOpen){
-            Debug.Log("Serial port is open!");
+        catch (Exception ex)
+        {
+            Debug.LogError($"Serial Port Open Error: {ex.Message}");
+            serialPortError = true;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!startSong){
-            if(Input.anyKeyDown){
+        if (!startSong)
+        {
+            if (Input.anyKeyDown)
+            {
                 startSong = true;
                 beatScoller.hasStarted = true;
                 noteSpawner.hasStarted = true;
                 song.Play();
             }
         }
-        else{
-            if(!song.isPlaying && !resultsScreen.activeInHierarchy){
+        else
+        {
+            if (!song.isPlaying && !resultsScreen.activeInHierarchy)
+            {
                 resultsScreen.SetActive(true);
                 normalsText.text = normalHits.ToString();
                 goodsText.text = goodHits.ToString();
@@ -79,56 +94,76 @@ public class GameManager : MonoBehaviour
                 percentHitText.text = percentHit.ToString("F1") + "%";
 
                 string rankVal = "F";
-                if(percentHit > 95){
+                if (percentHit > 95)
+                {
                     rankVal = "S";
                 }
-                else if(percentHit > 85){
+                else if (percentHit > 85)
+                {
                     rankVal = "A";
-                }     
-                else if(percentHit > 70){
+                }
+                else if (percentHit > 70)
+                {
                     rankVal = "B";
                 }
-                else if(percentHit > 55){
+                else if (percentHit > 55)
+                {
                     rankVal = "C";
                 }
-                else if(percentHit > 40){
+                else if (percentHit > 40)
+                {
                     rankVal = "D";
                 }
                 rankText.text = rankVal;
                 finalScoreText.text = currentScore.ToString();
             }
         }
+
         ArduinoToKeyVal();
     }
 
-    public void ArduinoToKeyVal(){
+    public void ArduinoToKeyVal()
+    {
+        if (serialPortError) {
+            //TODO: Read input from keyboard instead
+            return;
+        }
+
         serialPort.ReadTimeout = 1;
         serialPort.DtrEnable = true;
 
-        try{
+        try
+        {
             string dataFromArduinoString = serialPort.ReadLine();
             char keyCodeValue;
-            if (char.TryParse(dataFromArduinoString, out keyCodeValue)){
-                keyToPress = (KeyCode) keyCodeValue;
+            if (char.TryParse(dataFromArduinoString, out keyCodeValue))
+            {
+                keyToPress = (KeyCode)keyCodeValue;
             }
-            else{
+            else
+            {
                 keyToPress = KeyCode.None;
             }
         }
-        catch (TimeoutException e){
+        catch (TimeoutException e)
+        {
         }
     }
 
-    public static KeyCode GetKeyVal(){
+    public static KeyCode GetKeyVal()
+    {
         return keyToPress;
     }
 
 
-    public void NoteHit(){
+    public void NoteHit()
+    {
         Debug.Log("Hit on time");
-        if(currentMultiplier - 1 < multiplierThresholds.Length){
+        if (currentMultiplier - 1 < multiplierThresholds.Length)
+        {
             multiplierTracker++;
-            if(multiplierThresholds[currentMultiplier - 1] <= multiplierTracker){
+            if (multiplierThresholds[currentMultiplier - 1] <= multiplierTracker)
+            {
                 multiplierTracker = 0;
                 currentMultiplier++;
             }
@@ -137,26 +172,30 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + currentScore;
     }
 
-    public void NormalHit(){
+    public void NormalHit()
+    {
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
         normalHits++;
 
     }
 
-    public void GoodHit(){
+    public void GoodHit()
+    {
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit();
         goodHits++;
     }
 
-    public void PerfectHit(){
+    public void PerfectHit()
+    {
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
         perfectHits++;
     }
 
-    public void NoteMissed(){
+    public void NoteMissed()
+    {
         Debug.Log("Missed note");
         currentMultiplier = 1;
         multiplierTracker = 0;

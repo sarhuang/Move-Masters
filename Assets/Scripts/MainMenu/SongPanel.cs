@@ -41,6 +41,8 @@ public class SongPanel : MonoBehaviour
 
     public void PlaySong() {
         //Create song selector object, change scene
+        NoteSpawner ns;
+
         if (songLocation == null) {
             Debug.LogError("SongPanel set up incorrectly!");
             return;
@@ -52,7 +54,10 @@ public class SongPanel : MonoBehaviour
             return;
         }
 
-        //TODO: Create note spawner object
+        //TODO: Check if note spawner already exists, if it does change the song it loaded
+        ns = Instantiate(MainMenuController.m.NoteSpawnerRef).GetComponent<NoteSpawner>();
+        ns.LoadSongFile(songLocation);
+        DontDestroyOnLoad(ns.gameObject);
         SceneManager.LoadScene(1);
     }
 }

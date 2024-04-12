@@ -1,7 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
+    public static NoteSpawner ns;
     public bool hasStarted;
     public GameObject[] notePrefabs;
     public string timingsFileName; // Name of the text file containing timings
@@ -13,9 +15,16 @@ public class NoteSpawner : MonoBehaviour
     private float elapsedTime = 0.0f;
     private int currentSpawnIndex = 0;
 
-    void Start()
-    {
-        Debug.Log("NoteSpawner start");
+    void Awake() {
+        //This code checks and makes sure a NoteSpawner doesn't already exist. If it does, it gets destroyed
+        GameObject[] check = GameObject.FindGameObjectsWithTag("NoteSpawner");
+        foreach (GameObject c in check) {
+            if (c != gameObject) {
+                //This makes sure it excludes itself from the check
+                Destroy(gameObject);
+            }
+        }
+
         LoadSpawnTimes();
     }
 
@@ -122,5 +131,10 @@ public class NoteSpawner : MonoBehaviour
         BeatScroller beatScroller = newNote.AddComponent<BeatScroller>();
         beatScroller.hasStarted = true; // Start scrolling immediately
         beatScroller.beatTempo = songBPM;
+    }
+
+    public void LoadSongFile(string fileName) {
+        timingsFileName = fileName;
+        LoadSpawnTimes();
     }
 }

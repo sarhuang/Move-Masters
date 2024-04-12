@@ -7,10 +7,12 @@ using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
+    public static MainMenuController m;
     public GameObject TitleScreen;
     public GameObject SongSelectionScreen;
     public TMP_Text TitleText;
     public GameObject SongPanelRef;
+    public GameObject NoteSpawnerRef;
     LinkedList<AnimatedObject> animatedObjects;
     List<AnimatedObject> finishedAnimations;
     List<SongPanel> allSongs;
@@ -18,6 +20,7 @@ public class MainMenuController : MonoBehaviour
     readonly int songDisplacement = 400; //Distance between song panels
 
     void Start() {
+        m = this;
         Vector2 titleStartPos = new Vector2(TitleText.transform.position.x, TitleText.transform.position.y+400);
         Vector2 titleEndPos = new Vector2(TitleText.transform.position.x, TitleText.transform.position.y);
 

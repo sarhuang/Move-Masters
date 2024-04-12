@@ -529,6 +529,7 @@ MonoBehaviour:
   SongSelectionScreen: {fileID: 770570447}
   TitleText: {fileID: 1032082312}
   SongPanelRef: {fileID: 5799558126249820733, guid: 6496f5cfcc5c34faa9d17b3ff36e3830, type: 3}
+  NoteSpawnerRef: {fileID: 5101051173072766147, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
 --- !u!4 &724818428
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+130
+Neon_Indian_SLUMLORD
+5.189, bottom_left
+6.067, top_left
+6.981, left
+7.948, down
+8.875, center
+9.323, down
+9.739, bottom_right
+10.699, left
+11.626, up
+12.565, right
+13.020, down
+13.442, right
+14.467, down
+15.378, bottom_right
+16.289, top_left
+16.731, bottom_left
+17.194, top_right
+17.688, right

@@ -42,15 +42,16 @@ public class SongPanel : MonoBehaviour
     public void PlaySong() {
         //Create song selector object, change scene
         NoteSpawner ns;
+        string filepath = $@"Song-Files/{songLocation.Trim()}";
 
         if (songLocation == null) {
             Debug.LogError("SongPanel set up incorrectly!");
             return;
         }
 
-        TextAsset songFile = Resources.Load<TextAsset>(songLocation);
+        TextAsset songFile = Resources.Load<TextAsset>(filepath);
         if (songFile == null) {
-            Debug.LogError($"Unable to load song file {songLocation}");
+            Debug.LogError($"Unable to load song file {filepath}.");
             return;
         }
 

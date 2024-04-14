@@ -14,6 +14,8 @@ public class NoteSpawner : MonoBehaviour
 
     private float elapsedTime = 0.0f;
     private int currentSpawnIndex = 0;
+    AudioSource audioSource;
+    string musicFileName;
 
     void Awake() {
         //This code checks and makes sure a NoteSpawner doesn't already exist. If it does, it gets destroyed
@@ -25,13 +27,14 @@ public class NoteSpawner : MonoBehaviour
             }
         }
 
+        audioSource = GetComponent<AudioSource>();
         LoadSpawnTimes();
     }
 
     void LoadSpawnTimes()
     {
         // Load the text file containing timings from Resources folder
-        TextAsset timingTextAsset = Resources.Load<TextAsset>(timingsFileName);
+        TextAsset timingTextAsset = Resources.Load<TextAsset>($@"song-files/{timingsFileName}");
         if (timingTextAsset == null)
         {
             Debug.LogError("Failed to load timing text file.");
@@ -57,22 +60,31 @@ public class NoteSpawner : MonoBehaviour
             songBPM = bpm;
         }
         
+        musicFileName = lines[1].Trim();
 
         spawnTimes = new float[lines.Length-1];
         noteTypes = new string[lines.Length-1];
 
-        for (int i = 1; i < lines.Length; i++)
+        for (int i = 2; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split(',');
             if (parts.Length == 2 && float.TryParse(parts[0], out float timing))
             {
-                spawnTimes[i-1] = timing;
-                noteTypes[i-1] = parts[1].Trim(); // Remove any leading or trailing whitespace
+                spawnTimes[i-2] = timing;
+                noteTypes[i-2] = parts[1].Trim(); // Remove any leading or trailing whitespace
             }
             else
             {
                 Debug.LogError("Failed to parse timing: " + lines[i]);
             }
+        }
+
+        // Load the music
+        AudioClip musicAsset = Resources.Load<AudioClip>($"music/{musicFileName}");
+        if (musicAsset != null) {
+            audioSource.clip = musicAsset;
+        } else {
+            Debug.LogError($"Unable to open music file {musicFileName}");
         }
     }
 
@@ -133,8 +145,12 @@ public class NoteSpawner : MonoBehaviour
         beatScroller.beatTempo = songBPM;
     }
 
-    public void LoadSongFile(string fileName) {
-        timingsFileName = fileName;
+    public void LoadSongFile(string timingsFile) {
+        timingsFileName = timingsFile.Trim();
         LoadSpawnTimes();
+    }
+
+    public AudioSource GetAudioSource() {
+        return audioSource;
     }
 }

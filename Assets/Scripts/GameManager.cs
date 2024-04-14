@@ -8,10 +8,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource song;
     public bool startSong;
-    public BeatScroller beatScoller;
-    public NoteSpawner noteSpawner;
+    public BeatScroller beatScoller = null;
+    public NoteSpawner noteSpawner = null;
 
     public static GameManager instance;
 
@@ -48,6 +47,12 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: 0";
         currentMultiplier = 1;
 
+        GameObject ns = GameObject.FindWithTag("NoteSpawner");
+        if (ns != null) {
+            noteSpawner = ns.GetComponent<NoteSpawner>();
+            beatScoller = ns.GetComponent<BeatScroller>();
+        }
+
         try
         {
             if (serialPort.IsOpen)
@@ -77,12 +82,12 @@ public class GameManager : MonoBehaviour
                 startSong = true;
                 beatScoller.hasStarted = true;
                 noteSpawner.hasStarted = true;
-                song.Play();
+                noteSpawner.GetAudioSource().Play();
             }
         }
         else
         {
-            if (!song.isPlaying && !resultsScreen.activeInHierarchy)
+            if (!noteSpawner.GetAudioSource().isPlaying && !resultsScreen.activeInHierarchy)
             {
                 resultsScreen.SetActive(true);
                 normalsText.text = normalHits.ToString();
@@ -201,5 +206,10 @@ public class GameManager : MonoBehaviour
         multiplierTracker = 0;
         multiplierText.text = "Multipler: x" + currentMultiplier;
         missedHits++;
+    }
+
+    public void SetNoteSpawner(NoteSpawner ns) {
+        noteSpawner = ns;
+        beatScoller = ns.GetComponent<BeatScroller>();
     }
 }

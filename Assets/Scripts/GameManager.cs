@@ -70,6 +70,8 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"Serial Port Open Error: {ex.Message}");
             serialPortError = true;
         }
+
+        StartSong();
     }
 
     // Update is called once per frame
@@ -77,13 +79,7 @@ public class GameManager : MonoBehaviour
     {
         if (!startSong)
         {
-            if (Input.anyKeyDown)
-            {
-                startSong = true;
-                beatScoller.hasStarted = true;
-                noteSpawner.hasStarted = true;
-                noteSpawner.GetAudioSource().Play();
-            }
+            //TODO: Clean up this if statement
         }
         else
         {
@@ -125,6 +121,13 @@ public class GameManager : MonoBehaviour
         }
 
         ArduinoToKeyVal();
+    }
+
+    public void StartSong() {
+        startSong = true;
+        beatScoller.hasStarted = true;
+        noteSpawner.hasStarted = true;
+        noteSpawner.GetAudioSource().Play();
     }
 
     public void ArduinoToKeyVal()

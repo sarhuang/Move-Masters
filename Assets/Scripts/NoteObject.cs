@@ -7,6 +7,7 @@ public class NoteObject : MonoBehaviour
     public bool canBePressed;
     public KeyCode keyToPress;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
+    readonly float heightThreshold = 11; //Notes above this y position will get destroyed
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +43,11 @@ public class NoteObject : MonoBehaviour
                     Instantiate(perfectEffect, position, perfectEffect.transform.rotation);
                 }
             }
+        }
+
+        //This cleans up notes that get too far off the screen
+        if (transform.position.y > heightThreshold) {
+            Destroy(gameObject);
         }
     }
 

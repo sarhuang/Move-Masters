@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18517f9a3c5b61d4585502c28e98f0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  song: {fileID: 7614988549496798470}
   startSong: 0
   beatScoller: {fileID: 1672428999}
   noteSpawner: {fileID: 1672429001}
@@ -3863,11 +3862,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
---- !u!82 &7614988549496798470 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 5982288027511288604, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
-  m_PrefabInstance: {fileID: 7614988549496798469}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

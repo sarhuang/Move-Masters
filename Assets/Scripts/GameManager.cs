@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject resultsScreen;
     public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+    public GameObject mixMode;
+    public GameObject ddrMode;
+    public GameObject piuMode;
 
     static SerialPort serialPort = new("COM10", 9600);
     static bool serialPortError = false;
@@ -71,6 +74,7 @@ public class GameManager : MonoBehaviour
             serialPortError = true;
         }
 
+        SetGameMode(noteSpawner.musicGameMode);
         StartSong();
     }
 
@@ -214,5 +218,25 @@ public class GameManager : MonoBehaviour
     public void SetNoteSpawner(NoteSpawner ns) {
         noteSpawner = ns;
         beatScoller = ns.GetComponent<BeatScroller>();
+    }
+
+    public void SetGameMode(string mode) {
+        switch (mode) {
+            case "ddr":
+                ddrMode.SetActive(true);
+                piuMode.SetActive(false);
+                mixMode.SetActive(false);
+                break;
+            case "piu":
+                ddrMode.SetActive(false);
+                piuMode.SetActive(true);
+                mixMode.SetActive(false);
+                break;
+            case "mix":
+                ddrMode.SetActive(false);
+                piuMode.SetActive(false);
+                mixMode.SetActive(true);
+                break;
+        }
     }
 }

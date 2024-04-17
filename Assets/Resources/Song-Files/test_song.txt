@@ -1,0 +1,7 @@
+160.0
+TestSong
+mix
+0.189, Bottom_Left_Arrow
+1.067, Top_Left_Arrow
+2.981, Left_Arrow
+3.948, Down_Arrow

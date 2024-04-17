@@ -17,7 +17,7 @@ public class NoteSpawner : MonoBehaviour
     private int currentSpawnIndex = 0;
     AudioSource audioSource;
     string musicFileName;
-    public static string musicGameMode;
+    public string musicGameMode;
 
     void Awake() {
         //This code checks and makes sure a NoteSpawner doesn't already exist. If it does, it gets destroyed
@@ -65,13 +65,13 @@ public class NoteSpawner : MonoBehaviour
         musicFileName = lines[1].Trim();
         musicGameMode = lines[2].Trim();
 
-        spawnTimes = new float[lines.Length-2];
-        noteTypes = new string[lines.Length-2];
+        spawnTimes = new float[lines.Length-3];
+        noteTypes = new string[lines.Length-3];
 
         for (int i = 3; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split(',');
-            if (parts.Length == 2 && float.TryParse(parts[0], out float timing))
+            if (parts.Length >= 2 && float.TryParse(parts[0], out float timing))
             {
                 spawnTimes[i-3] = timing;
                 noteTypes[i-3] = parts[1].Trim(); // Remove any leading or trailing whitespace
@@ -126,7 +126,6 @@ public class NoteSpawner : MonoBehaviour
             if (notePrefabs[i].name == noteTypes[currentSpawnIndex])
             {
                 prefabIndex = i;
-                ButtonController.ChangeArrowMode(musicGameMode, notePrefabs[prefabIndex].name, notePrefabs[prefabIndex].transform, 0f);
                 break;
             }
         }
@@ -138,10 +137,8 @@ public class NoteSpawner : MonoBehaviour
         }
 
         // Spawn the selected note prefab at the spawn point
-        Vector3 spawnPosition = new Vector3(notePrefabs[prefabIndex].transform.position.x, 
-                                            notePrefabs[prefabIndex].transform.position.y, 
-                                            notePrefabs[prefabIndex].transform.position.z);
-        GameObject newNote = Instantiate(notePrefabs[prefabIndex], spawnPosition, Quaternion.identity);
+        GameObject newNote = Instantiate(notePrefabs[prefabIndex]);
+        ButtonController.ChangeArrowMode(musicGameMode, notePrefabs[prefabIndex].name, newNote.transform, 0f);
 
         // Attach the BeatScroller script to the instantiated note GameObject
         BeatScroller beatScroller = newNote.AddComponent<BeatScroller>();

@@ -20,7 +20,7 @@ public class ButtonController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeArrowMode(NoteSpawner.musicGameMode, spriteRenderer.name, transform, 7f);
+        //ChangeArrowMode(NoteSpawner.musicGameMode, spriteRenderer.name, transform, 7f);
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    public static void ChangeArrowMode(string mode, string name, Transform transform, float yaxis){
+    public static void ChangeArrowMode(string mode, string name, Transform transform, float yaxis) {
         if(mode == "ddr"){
             if(name == ddrArrows[0]){
                 transform.position = new Vector3(-8f, yaxis, 0f);
@@ -62,19 +62,19 @@ public class ButtonController : MonoBehaviour
         }
         else if(mode == "piu"){
             if(name == piuArrows[0]){
-                transform.position = new Vector3(-8f, yaxis, 0f);
-            }
-            else if(name == piuArrows[1]){
-                transform.position = new Vector3(-6.2f, yaxis, 0f);
-            }
-            else if(name == piuArrows[2]){
                 transform.position = new Vector3(-4f, yaxis, 0f);
             }
+            else if(name == piuArrows[1]){
+                transform.position = new Vector3(-2, yaxis, 0f);
+            }
+            else if(name == piuArrows[2]){
+                transform.position = new Vector3(0, yaxis, 0f);
+            }
             else if(name == piuArrows[3]){
-                transform.position = new Vector3(-1.8f, yaxis, 0f);
+                transform.position = new Vector3(2f, yaxis, 0f);
             }
             else if(name == piuArrows[4]){
-                transform.position = new Vector3(0f, yaxis, 0f);
+                transform.position = new Vector3(4f, yaxis, 0f);
             }
             else{
                 Destroy(transform.gameObject);

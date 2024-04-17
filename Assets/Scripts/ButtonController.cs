@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 using Unity.VisualScripting;
+using System.Linq;
+using System;
 
 public class ButtonController : MonoBehaviour
 {
@@ -10,12 +12,15 @@ public class ButtonController : MonoBehaviour
     public Sprite defaultImage;
     public Sprite pressedImage;
     public KeyCode keyToPress;
-
+    static string[] ddrArrows = new string[4]{"Left_Arrow", "Down_Arrow", "Up_Arrow", "Right_Arrow"};
+    static string[] piuArrows = new string[5]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Center_Button", "Top_Right_Arrow", "Bottom_Right_Arrow"};
+    //string[] mixArrows = new string[9]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Left_Arrow", "Down_Arrow", "Center Button", "Up_Arrow", "Right_Arrow", "Top_Right_Arrow", "Bottom_Left_Arrow"};
    
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        ChangeArrowMode(NoteSpawner.musicGameMode, spriteRenderer.name, transform, 7f);
     }
 
     // Update is called once per frame
@@ -34,6 +39,46 @@ public class ButtonController : MonoBehaviour
         //if(key != keyToPress){
             Debug.Log(key + " key off");
             spriteRenderer.sprite = defaultImage;
+        }
+    }
+
+    public static void ChangeArrowMode(string mode, string name, Transform transform, float yaxis){
+        if(mode == "ddr"){
+            if(name == ddrArrows[0]){
+                transform.position = new Vector3(-8f, yaxis, 0f);
+            }
+            else if(name == ddrArrows[1]){
+                transform.position = new Vector3(-6f, yaxis, 0f);
+            }
+            else if(name == ddrArrows[2]){
+                transform.position = new Vector3(-4f, yaxis, 0f);
+            }
+            else if(name == ddrArrows[3]){
+                transform.position = new Vector3(-2f, yaxis, 0f);
+            }
+            else{
+                Destroy(transform.gameObject);
+            }
+        }
+        else if(mode == "piu"){
+            if(name == piuArrows[0]){
+                transform.position = new Vector3(-8f, yaxis, 0f);
+            }
+            else if(name == piuArrows[1]){
+                transform.position = new Vector3(-6.2f, yaxis, 0f);
+            }
+            else if(name == piuArrows[2]){
+                transform.position = new Vector3(-4f, yaxis, 0f);
+            }
+            else if(name == piuArrows[3]){
+                transform.position = new Vector3(-1.8f, yaxis, 0f);
+            }
+            else if(name == piuArrows[4]){
+                transform.position = new Vector3(0f, yaxis, 0f);
+            }
+            else{
+                Destroy(transform.gameObject);
+            }
         }
     }
 }

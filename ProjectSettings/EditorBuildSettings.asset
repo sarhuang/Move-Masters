@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 3c018289b698e4822b951670246787e5
   - enabled: 1
-    path: Assets/Scenes/ui1.unity
+    path: Assets/Scenes/Mix Mode.unity
     guid: f32b51e637c431b40b0c6ef887ed8607
   m_configObjects: {}

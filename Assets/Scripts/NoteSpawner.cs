@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NoteSpawner : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class NoteSpawner : MonoBehaviour
     private int currentSpawnIndex = 0;
     AudioSource audioSource;
     string musicFileName;
+    public static string musicGameMode;
 
     void Awake() {
         //This code checks and makes sure a NoteSpawner doesn't already exist. If it does, it gets destroyed
@@ -61,17 +63,18 @@ public class NoteSpawner : MonoBehaviour
         }
         
         musicFileName = lines[1].Trim();
+        musicGameMode = lines[2].Trim();
 
-        spawnTimes = new float[lines.Length-1];
-        noteTypes = new string[lines.Length-1];
+        spawnTimes = new float[lines.Length-2];
+        noteTypes = new string[lines.Length-2];
 
-        for (int i = 2; i < lines.Length; i++)
+        for (int i = 3; i < lines.Length; i++)
         {
             string[] parts = lines[i].Split(',');
             if (parts.Length == 2 && float.TryParse(parts[0], out float timing))
             {
-                spawnTimes[i-2] = timing;
-                noteTypes[i-2] = parts[1].Trim(); // Remove any leading or trailing whitespace
+                spawnTimes[i-3] = timing;
+                noteTypes[i-3] = parts[1].Trim(); // Remove any leading or trailing whitespace
             }
             else
             {
@@ -117,12 +120,13 @@ public class NoteSpawner : MonoBehaviour
         }
 
         // Find the index of the note prefab corresponding to the note type
-        int prefabIndex = -1;
+        int prefabIndex = -1;        
         for (int i = 0; i < notePrefabs.Length; i++)
         {
             if (notePrefabs[i].name == noteTypes[currentSpawnIndex])
             {
                 prefabIndex = i;
+                ButtonController.ChangeArrowMode(musicGameMode, notePrefabs[prefabIndex].name, notePrefabs[prefabIndex].transform, 0f);
                 break;
             }
         }

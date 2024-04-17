@@ -42,42 +42,42 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    public static void ChangeArrowMode(string mode, string name, Transform transform, float yaxis) {
+    public static void ChangeArrowMode(string mode, string name, Transform t, float yaxis) {
         if(mode == "ddr"){
             if(name == ddrArrows[0]){
-                transform.position = new Vector3(-8f, yaxis, 0f);
+                t.position = new Vector3(-8f, yaxis, 0f);
             }
             else if(name == ddrArrows[1]){
-                transform.position = new Vector3(-6f, yaxis, 0f);
+                t.position = new Vector3(-6f, yaxis, 0f);
             }
             else if(name == ddrArrows[2]){
-                transform.position = new Vector3(-4f, yaxis, 0f);
+                t.position = new Vector3(-4f, yaxis, 0f);
             }
             else if(name == ddrArrows[3]){
-                transform.position = new Vector3(-2f, yaxis, 0f);
+                t.position = new Vector3(-2f, yaxis, 0f);
             }
             else{
-                Destroy(transform.gameObject);
+                Destroy(t.gameObject);
             }
         }
         else if(mode == "piu"){
             if(name == piuArrows[0]){
-                transform.position = new Vector3(-4f, yaxis, 0f);
+                t.position = new Vector3(-4f, yaxis, 0f);
             }
             else if(name == piuArrows[1]){
-                transform.position = new Vector3(-2, yaxis, 0f);
+                t.position = new Vector3(-2, yaxis, 0f);
             }
             else if(name == piuArrows[2]){
-                transform.position = new Vector3(0, yaxis, 0f);
+                t.position = new Vector3(0, yaxis, 0f);
             }
             else if(name == piuArrows[3]){
-                transform.position = new Vector3(2f, yaxis, 0f);
+                t.position = new Vector3(2f, yaxis, 0f);
             }
             else if(name == piuArrows[4]){
-                transform.position = new Vector3(4f, yaxis, 0f);
+                t.position = new Vector3(4f, yaxis, 0f);
             }
             else{
-                Destroy(transform.gameObject);
+                Destroy(t.gameObject);
             }
         }
     }

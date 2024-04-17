@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -238,5 +239,9 @@ public class GameManager : MonoBehaviour
                 mixMode.SetActive(true);
                 break;
         }
+    }
+
+    public void ReturnToMainMenu() {
+        SceneManager.LoadScene(0);
     }
 }

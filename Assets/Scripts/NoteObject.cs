@@ -7,7 +7,9 @@ public class NoteObject : MonoBehaviour
     public bool canBePressed;
     public KeyCode keyToPress;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
+    public NoteSpawner ns = null;
     readonly float heightThreshold = 11; //Notes above this y position will get destroyed
+    float heightOffset = 7f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,38 +21,50 @@ public class NoteObject : MonoBehaviour
     void Update()
     {
         KeyCode key = GameManager.GetKeyVal();
+        GameObject createdObj;
+        Vector3 spawnPosition;
         //CHANGE THIS LINE FOR THE BUTTON
         if(Input.GetKeyDown(keyToPress)){
         //if(key == keyToPress){ 
             if(canBePressed){
-                if(Mathf.Abs(transform.position.y - 7) > 0.3){
+                if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.3){
                     Debug.Log("normal hit");
                     GameManager.instance.NormalHit();
-                    Vector3 position = new Vector3(0.26f, 3.0f, 0.0f);
-                    Instantiate(hitEffect, position, hitEffect.transform.rotation);
+                    spawnPosition = new Vector3(0.26f, 3.0f, 0.0f);
+                    createdObj = Instantiate(hitEffect, GameManager.instance.buttonSpawnLocation);
                 }
-                else if(Mathf.Abs(transform.position.y - 7) > 0.15){
+                else if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.15){
                     Debug.Log("good hit");
                     GameManager.instance.GoodHit();
-                    Vector3 position = new Vector3(0.44f, 3.0f, 0.0f);
-                    Instantiate(goodEffect, position, goodEffect.transform.rotation);
+                    spawnPosition = new Vector3(0.44f, 3.0f, 0.0f);
+                    createdObj = Instantiate(goodEffect, GameManager.instance.buttonSpawnLocation);
                 }
                 else{
                     Debug.Log("perfect hit");
                     GameManager.instance.PerfectHit();
-                    Vector3 position = new Vector3(0.3f, 3.0f, 0.0f);
-                    Instantiate(perfectEffect, position, perfectEffect.transform.rotation);
+                    spawnPosition = new Vector3(0.3f, 3.0f, 0.0f);
+                    createdObj = Instantiate(perfectEffect, GameManager.instance.buttonSpawnLocation);
                 }
+                createdObj.transform.localPosition = spawnPosition;
 
                 gameObject.SetActive(false); //We have to set it to inactive or it will count as a miss
-                Destroy(gameObject);
+                DestroyNote();
             }
         }
 
         //This cleans up notes that get too far off the screen
         if (transform.position.y > heightThreshold) {
-            Destroy(gameObject);
+            DestroyNote();
         }
+    }
+
+    public void DestroyNote() {
+        if (ns == null) {
+            Debug.LogWarning("Unable to remove NoteObject from notespawner!");
+        } else {
+            ns.RemoveNoteFromList(this);
+        }
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

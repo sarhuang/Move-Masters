@@ -14,6 +14,7 @@ public class ButtonController : MonoBehaviour
     public KeyCode keyToPress;
     static string[] ddrArrows = new string[4]{"Left_Arrow", "Down_Arrow", "Up_Arrow", "Right_Arrow"};
     static string[] piuArrows = new string[5]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Center_Button", "Top_Right_Arrow", "Bottom_Right_Arrow"};
+    static float zPos = 8;
     //string[] mixArrows = new string[9]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Left_Arrow", "Down_Arrow", "Center Button", "Up_Arrow", "Right_Arrow", "Top_Right_Arrow", "Bottom_Left_Arrow"};
    
     // Start is called before the first frame update
@@ -45,16 +46,16 @@ public class ButtonController : MonoBehaviour
     public static void ChangeArrowMode(string mode, string name, Transform t, float yaxis) {
         if(mode == "ddr"){
             if(name == ddrArrows[0]){
-                t.position = new Vector3(-8f, yaxis, 0f);
+                t.localPosition = new Vector3(-8f, yaxis, zPos);
             }
             else if(name == ddrArrows[1]){
-                t.position = new Vector3(-6f, yaxis, 0f);
+                t.localPosition = new Vector3(-6f, yaxis, zPos);
             }
             else if(name == ddrArrows[2]){
-                t.position = new Vector3(-4f, yaxis, 0f);
+                t.localPosition = new Vector3(-4f, yaxis, zPos);
             }
             else if(name == ddrArrows[3]){
-                t.position = new Vector3(-2f, yaxis, 0f);
+                t.localPosition = new Vector3(-2f, yaxis, zPos);
             }
             else{
                 Destroy(t.gameObject);
@@ -62,19 +63,19 @@ public class ButtonController : MonoBehaviour
         }
         else if(mode == "piu"){
             if(name == piuArrows[0]){
-                t.position = new Vector3(-4f, yaxis, 0f);
+                t.localPosition = new Vector3(-4f, yaxis, zPos);
             }
             else if(name == piuArrows[1]){
-                t.position = new Vector3(-2, yaxis, 0f);
+                t.localPosition = new Vector3(-2, yaxis, zPos);
             }
             else if(name == piuArrows[2]){
-                t.position = new Vector3(0, yaxis, 0f);
+                t.localPosition = new Vector3(0, yaxis, zPos);
             }
             else if(name == piuArrows[3]){
-                t.position = new Vector3(2f, yaxis, 0f);
+                t.localPosition = new Vector3(2f, yaxis, zPos);
             }
             else if(name == piuArrows[4]){
-                t.position = new Vector3(4f, yaxis, 0f);
+                t.localPosition = new Vector3(4f, yaxis, zPos);
             }
             else{
                 Destroy(t.gameObject);

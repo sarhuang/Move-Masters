@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 106068780039628724}
   - component: {fileID: 8581731854881262974}
   - component: {fileID: 2937186296055271732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PerfectEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

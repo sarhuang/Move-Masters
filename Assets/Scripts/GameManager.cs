@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public GameObject mixMode;
     public GameObject ddrMode;
     public GameObject piuMode;
+    public Transform buttonSpawnLocation;
 
     [Header("UI Objects")]
     public Text percentHitText;
@@ -48,6 +49,8 @@ public class GameManager : MonoBehaviour
     string scorePadding = "00000000";
     public TMP_Text multiplierText;
     public Slider powerBar;
+    public Color highPowerColor;
+    public Color lowPowerColor;
 
     static SerialPort serialPort = new("COM10", 9600);
     static bool serialPortError = false;
@@ -95,50 +98,60 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!startSong)
-        {
-            //TODO: Clean up this if statement
-        }
-        else
+        if (startSong)
         {
             if (!noteSpawner.GetAudioSource().isPlaying && !resultsScreen.activeInHierarchy)
             {
-                resultsScreen.SetActive(true);
-                normalsText.text = normalHits.ToString();
-                goodsText.text = goodHits.ToString();
-                perfectsText.text = perfectHits.ToString();
-                missesText.text = missedHits.ToString();
-                totalNotes = normalHits + goodHits + perfectHits + missedHits;
-                float percentHit = (normalHits + goodHits + perfectHits) / totalNotes * 100f;
-                percentHitText.text = percentHit.ToString("F1") + "%";
+                //This means the song naturally ended
+                EndGame();
+            }
 
-                string rankVal = "F";
-                if (percentHit > 95)
-                {
-                    rankVal = "S";
-                }
-                else if (percentHit > 85)
-                {
-                    rankVal = "A";
-                }
-                else if (percentHit > 70)
-                {
-                    rankVal = "B";
-                }
-                else if (percentHit > 55)
-                {
-                    rankVal = "C";
-                }
-                else if (percentHit > 40)
-                {
-                    rankVal = "D";
-                }
-                rankText.text = rankVal;
-                finalScoreText.text = currentScore.ToString();
+            if (powerVal <= 0) {
+                noteSpawner.GetAudioSource().Stop();
+                noteSpawner.hasStarted = false;
+                EndGame();
             }
         }
 
         ArduinoToKeyVal();
+    }
+
+    public void EndGame() {
+        resultsScreen.SetActive(true);
+        normalsText.text = normalHits.ToString();
+        goodsText.text = goodHits.ToString();
+        perfectsText.text = perfectHits.ToString();
+        missesText.text = missedHits.ToString();
+        totalNotes = normalHits + goodHits + perfectHits + missedHits;
+        float percentHit = (normalHits + goodHits + perfectHits) / totalNotes * 100f;
+        percentHitText.text = percentHit.ToString("F1") + "%";
+
+        //Destroy all existing notes
+        noteSpawner.DestroyAllNotes();
+
+        string rankVal = "F";
+        if (percentHit > 95)
+        {
+            rankVal = "S";
+        }
+        else if (percentHit > 85)
+        {
+            rankVal = "A";
+        }
+        else if (percentHit > 70)
+        {
+            rankVal = "B";
+        }
+        else if (percentHit > 55)
+        {
+            rankVal = "C";
+        }
+        else if (percentHit > 40)
+        {
+            rankVal = "D";
+        }
+        rankText.text = rankVal;
+        finalScoreText.text = currentScore.ToString();
     }
 
     public void StartSong() {
@@ -206,6 +219,7 @@ public class GameManager : MonoBehaviour
     public void UpdatePower(float val) {
         powerVal = val;
         powerBar.value = powerVal;
+        powerBar.fillRect.GetComponent<Image>().color = Color.Lerp(lowPowerColor, highPowerColor, powerVal);
     }
 
     public void UpdateStreak(int val) {
@@ -285,6 +299,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void ReturnToMainMenu() {
+        Destroy(noteSpawner.gameObject); //This prevents a bug that can happen if we then try to go select another song after exiting
         SceneManager.LoadScene(0);
     }
 }

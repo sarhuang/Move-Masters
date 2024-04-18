@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2056117318815353824}
   - component: {fileID: 7150244196717521920}
   - component: {fileID: 4659275225128651359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MissEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,3 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 1
+  inflationDuration: 0.1
+  maxScale: 2

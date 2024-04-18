@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8887647535142689963}
   - component: {fileID: 318660102614349679}
   - component: {fileID: 7618818367842401228}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Top_Left_Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,6 +104,7 @@ MonoBehaviour:
   goodEffect: {fileID: 7205048065337510128, guid: ec9ca10af8646454fb34caa2a1c81e92, type: 3}
   perfectEffect: {fileID: 8726644223223191180, guid: 048ad860ef2396f42ba3606c31d46236, type: 3}
   missEffect: {fileID: 3396003329987990418, guid: b44a1d7c4ce8fa744bac8da0d96b13e6, type: 3}
+  ns: {fileID: 0}
 --- !u!58 &7618818367842401228
 CircleCollider2D:
   m_ObjectHideFlags: 0

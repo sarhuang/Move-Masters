@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class NoteSpawner : MonoBehaviour
     private int currentSpawnIndex = 0;
     AudioSource audioSource;
     string musicFileName;
+    List<NoteObject> spawnedNotes;
     public string musicGameMode;
 
     void Awake() {
@@ -30,6 +32,7 @@ public class NoteSpawner : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+        spawnedNotes = new List<NoteObject>();
         LoadSpawnTimes();
     }
 
@@ -137,7 +140,9 @@ public class NoteSpawner : MonoBehaviour
         }
 
         // Spawn the selected note prefab at the spawn point
-        GameObject newNote = Instantiate(notePrefabs[prefabIndex]);
+        GameObject newNote = Instantiate(notePrefabs[prefabIndex], GameManager.instance.buttonSpawnLocation);
+        newNote.GetComponent<NoteObject>().ns = this;
+        spawnedNotes.Add(newNote.GetComponent<NoteObject>());
         ButtonController.ChangeArrowMode(musicGameMode, notePrefabs[prefabIndex].name, newNote.transform, 0f);
 
         // Attach the BeatScroller script to the instantiated note GameObject
@@ -149,6 +154,18 @@ public class NoteSpawner : MonoBehaviour
     public void LoadSongFile(string timingsFile) {
         timingsFileName = timingsFile.Trim();
         LoadSpawnTimes();
+    }
+
+    public void RemoveNoteFromList(NoteObject note) {
+        spawnedNotes.Remove(note);
+    }
+
+    public void DestroyAllNotes() {
+        for (int i = 0; i < spawnedNotes.Count; i++) {
+            if (spawnedNotes[i] != null) {
+                Destroy(spawnedNotes[i].gameObject);
+            }
+        }
     }
 
     public AudioSource GetAudioSource() {

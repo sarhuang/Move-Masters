@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Text;
+using TMPro;
 using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,28 +17,37 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    public int currentScore;
+    public int currentScore = 0;
     public int scorePerNote = 100;
     public int scorePerGoodNote = 125;
     public int scorePerPerfectNote = 150;
 
     public int currentMultiplier;
     public int multiplierTracker;
+    int currentStreak = 0;
+    float powerVal = 0.5f;
+    float powerHitIncreaseAmount = 0.02f;
+    float pwoerMissAmount = 0.06f;
     public int[] multiplierThresholds;
-    public Text scoreText;
-    public Text multiplierText;
 
     public float totalNotes;
     public float normalHits;
     public float goodHits;
     public float perfectHits;
     public float missedHits;
-
-    public GameObject resultsScreen;
-    public Text percentHitText, normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+    [Header("Gamemode Refs")]
     public GameObject mixMode;
     public GameObject ddrMode;
     public GameObject piuMode;
+
+    [Header("UI Objects")]
+    public Text percentHitText;
+    public Text normalsText, goodsText, perfectsText, missesText, rankText, finalScoreText;
+    public GameObject resultsScreen;
+    public TMP_Text scoreText;
+    string scorePadding = "00000000";
+    public TMP_Text multiplierText;
+    public Slider powerBar;
 
     static SerialPort serialPort = new("COM10", 9600);
     static bool serialPortError = false;
@@ -48,8 +59,10 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManger start!");
         instance = this;
-        scoreText.text = "Score: 0";
         currentMultiplier = 1;
+        UpdateScoreText();
+        UpdateStreak(0);
+        UpdatePower(0.5f);
 
         GameObject ns = GameObject.FindWithTag("NoteSpawner");
         if (ns != null) {
@@ -172,17 +185,47 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         Debug.Log("Hit on time");
-        if (currentMultiplier - 1 < multiplierThresholds.Length)
-        {
-            multiplierTracker++;
-            if (multiplierThresholds[currentMultiplier - 1] <= multiplierTracker)
-            {
-                multiplierTracker = 0;
-                currentMultiplier++;
+        // if (currentMultiplier - 1 < multiplierThresholds.Length)
+        // {
+        //     multiplierTracker++;
+        //     if (multiplierThresholds[currentMultiplier - 1] <= multiplierTracker)
+        //     {
+        //         multiplierTracker = 0;
+        //         currentMultiplier++;
+        //     }
+        // }
+        UpdateStreak(currentStreak+1);
+        UpdatePower(powerVal+powerHitIncreaseAmount);
+        UpdateScoreText();
+    }
+
+    public void UpdateScoreText() {
+        scoreText.text = currentScore.ToString(scorePadding);
+    }
+
+    public void UpdatePower(float val) {
+        powerVal = val;
+        powerBar.value = powerVal;
+    }
+
+    public void UpdateStreak(int val) {
+        int threshold;
+
+        currentStreak = val;
+        if (currentStreak == 0) {
+            currentMultiplier = 1;
+        } else {
+            //This has to be done in reverse so we get the right multiplier
+            for (int i = multiplierThresholds.Length-1; i > 0; i--) {
+                threshold = multiplierThresholds[i];
+                if (currentStreak >= threshold) {
+                    currentMultiplier = i + 1;
+                    break;
+                }
             }
         }
-        multiplierText.text = "Multipler: x" + currentMultiplier;
-        scoreText.text = "Score: " + currentScore;
+
+        multiplierText.text = $"x{currentMultiplier}";
     }
 
     public void NormalHit()
@@ -210,9 +253,9 @@ public class GameManager : MonoBehaviour
     public void NoteMissed()
     {
         Debug.Log("Missed note");
-        currentMultiplier = 1;
+        UpdateStreak(0);
         multiplierTracker = 0;
-        multiplierText.text = "Multipler: x" + currentMultiplier;
+        UpdatePower(powerVal-pwoerMissAmount);
         missedHits++;
     }
 

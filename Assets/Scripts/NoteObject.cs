@@ -23,7 +23,6 @@ public class NoteObject : MonoBehaviour
         if(Input.GetKeyDown(keyToPress)){
         //if(key == keyToPress){ 
             if(canBePressed){
-                gameObject.SetActive(false);
                 if(Mathf.Abs(transform.position.y - 7) > 0.3){
                     Debug.Log("normal hit");
                     GameManager.instance.NormalHit();
@@ -42,6 +41,9 @@ public class NoteObject : MonoBehaviour
                     Vector3 position = new Vector3(0.3f, 3.0f, 0.0f);
                     Instantiate(perfectEffect, position, perfectEffect.transform.rotation);
                 }
+
+                gameObject.SetActive(false); //We have to set it to inactive or it will count as a miss
+                Destroy(gameObject);
             }
         }
 

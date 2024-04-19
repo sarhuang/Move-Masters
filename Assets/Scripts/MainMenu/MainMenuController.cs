@@ -128,6 +128,7 @@ public class MainMenuController : MonoBehaviour
         SongPanel songPanel = Instantiate(SongPanelRef, SongSelectionScreen.transform).GetComponent<SongPanel>();
         songPanel.SetSongName(songName);
         songPanel.SetSongLocation(songLocation);
+        songPanel.SetImageIcon(imageLocation);
         allSongs.Add(songPanel);
     }
 

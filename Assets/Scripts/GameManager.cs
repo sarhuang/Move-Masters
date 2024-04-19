@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText;
     string scorePadding = "00000000";
     public TMP_Text multiplierText;
+    public TMP_Text streakText;
     public Slider powerBar;
     public Color highPowerColor;
     public Color lowPowerColor;
@@ -240,6 +241,7 @@ public class GameManager : MonoBehaviour
         }
 
         multiplierText.text = $"x{currentMultiplier}";
+        streakText.text = $"{currentStreak} streak";
     }
 
     public void NormalHit()

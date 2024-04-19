@@ -78,7 +78,8 @@ public class NoteObject : MonoBehaviour
             canBePressed = false;
             GameManager.instance.NoteMissed();
             Vector3 position = new Vector3(0.3f, 3.0f, 0.0f);
-            Instantiate(missEffect, position, missEffect.transform.rotation);
+            GameObject miss = Instantiate(missEffect, GameManager.instance.buttonSpawnLocation);
+            miss.transform.localPosition = position;
         }
     }
 }

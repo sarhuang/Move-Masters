@@ -61,4 +61,9 @@ public class SongPanel : MonoBehaviour
         DontDestroyOnLoad(ns.gameObject);
         SceneManager.LoadScene(1);
     }
+
+    public void SetImageIcon(string imageLocation) {
+        Sprite icon = Resources.Load<Sprite>($"song-icons/{imageLocation}");
+        ImageRef.sprite = icon;
+    }
 }

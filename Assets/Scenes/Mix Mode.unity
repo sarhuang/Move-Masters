@@ -6981,8 +6981,12 @@ PrefabInstance:
       value: NoteSpawner
       objectReference: {fileID: 0}
     - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: musicGameMode
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
       propertyPath: timingsFileName
-      value: alphabet
+      value: alphabet_piu
       objectReference: {fileID: 0}
     - target: {fileID: 8593146591643316979, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
       propertyPath: m_LocalPosition.x

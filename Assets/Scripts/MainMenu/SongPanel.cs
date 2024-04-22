@@ -63,7 +63,11 @@ public class SongPanel : MonoBehaviour
     }
 
     public void SetImageIcon(string imageLocation) {
-        Sprite icon = Resources.Load<Sprite>($"song-icons/{imageLocation}");
-        ImageRef.sprite = icon;
+        Sprite icon = Resources.Load<Sprite>($"song-icons/{imageLocation.Trim()}");
+        if (icon == null) {
+            print($"Unable to load icon at location {imageLocation}");
+        } else {
+            ImageRef.sprite = icon;
+        }
     }
 }

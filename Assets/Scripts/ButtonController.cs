@@ -27,17 +27,25 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*button1 = a
+        button2 = s
+        button3 = d
+        button4 = f
+        button5 = g
+        button6 = h
+        button7 = j
+        button8 = k
+        button9 = l*/
         KeyCode key = GameManager.GetKeyVal();
         //CHANGE THIS LINE FOR THE BUTTON
-        if(Input.GetKeyDown(keyToPress)){
-        //if(key == keyToPress){
+        //if(Input.GetKeyDown(keyToPress)){
+        if(key == keyToPress){
             Debug.Log(key + " pressed down");
             spriteRenderer.sprite = pressedImage;
         }    
         //CHANGE THIS LINE FOR THE BUTTON
-        if(Input.GetKeyUp(keyToPress)){
-        //else{
-        //if(key != keyToPress){
+        //if(Input.GetKeyUp(keyToPress)){
+        if(key != keyToPress){
             Debug.Log(key + " key off");
             spriteRenderer.sprite = defaultImage;
         }

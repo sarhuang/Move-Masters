@@ -443,7 +443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 35647d0dbc52f98418a423557ac0426a, type: 3}
   pressedImage: {fileID: 21300000, guid: 0ad99470eb7599f4386956b90ba985d2, type: 3}
-  keyToPress: 102
+  keyToPress: 115
 --- !u!61 &42740292
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 1d1f162df61e1fa44b709838240f38f1, type: 3}
   pressedImage: {fileID: 21300000, guid: 54dae70090caac747a62adb3a83ed3f0, type: 3}
-  keyToPress: 104
+  keyToPress: 107
 --- !u!61 &335185283
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 0dccd52ae578b5e4c89916bcd02fe097, type: 3}
   pressedImage: {fileID: 21300000, guid: e1fe9dab96a1b0f43bdb5c1a22eb12fd, type: 3}
-  keyToPress: 107
+  keyToPress: 108
 --- !u!212 &342725138
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2095,7 +2095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: e96af9546f3f66a4b8f0468b5a2aa92f, type: 3}
   pressedImage: {fileID: 21300000, guid: 155539b4faa0e7e4a86c8a98cf401d2a, type: 3}
-  keyToPress: 100
+  keyToPress: 102
 --- !u!61 &450328918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: ac209b67fbd9a7a45a21361fe55f1583, type: 3}
   pressedImage: {fileID: 21300000, guid: 7f20bb39f7bd0e94988172186c5ee835, type: 3}
-  keyToPress: 115
+  keyToPress: 106
 --- !u!212 &669511749
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5023,7 +5023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: a8a4ab025f382ff43b00a90b0fe3f40c, type: 3}
   pressedImage: {fileID: 21300000, guid: d5b3ff4699cf0834b9bf3135f32aa026, type: 3}
-  keyToPress: 108
+  keyToPress: 100
 --- !u!212 &1473461009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6439,7 +6439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultImage: {fileID: 21300000, guid: 34abf748078ee4f45b2fa86863e613aa, type: 3}
   pressedImage: {fileID: 21300000, guid: 16ad88bbf9edb644f9edc11a7185a30e, type: 3}
-  keyToPress: 106
+  keyToPress: 104
 --- !u!61 &1954822629
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6987,6 +6987,38 @@ PrefabInstance:
       propertyPath: timingsFileName
       value: alphabet
       objectReference: {fileID: 0}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1104095781811645103, guid: 0cdf171adafb43349bb83964b273cd7b, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3691814472979152127, guid: 1562d4bb533bb4244a9b629a7f9af87f, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 222832028837034948, guid: ea173fa963f1a484cb2268a5643c9cf3, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2631249755868929303, guid: cef750fbcc848fc42a49d973f3f6388a, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 7008351969278261628, guid: eccddab042361be44b06aca4b9bacd12, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 4289345469414187853, guid: 0a99f40c536af4249a00c499f23539b3, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 6549446813633294699, guid: d96d4e886ace0b54b908a8b1970fe4db, type: 3}
+    - target: {fileID: 6855989899771820736, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
+      propertyPath: notePrefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: 5424256188958774525, guid: affc7bd20bf22134f964fee276efd01e, type: 3}
     - target: {fileID: 8593146591643316979, guid: 6ef9ad4bf6c5946838ff2d2ca0b559c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

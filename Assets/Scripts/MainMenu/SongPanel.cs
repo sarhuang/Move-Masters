@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class SongPanel : MonoBehaviour
 {
     string songName = null;
@@ -13,6 +14,9 @@ public class SongPanel : MonoBehaviour
     public Image PanelRef;
     public Image ImageRef;
     public Button ButtonRef;
+    public AudioClip musicClip;
+    public AudioSource audioSource;
+    int musicClipStartTime = 0;
 
     public void SetSongLocation(string song) {
         songLocation = song;
@@ -21,6 +25,32 @@ public class SongPanel : MonoBehaviour
     public void SetSongName(string name) {
         songName = name;
         SongNameText.text = name;
+    }
+
+    public void SetMusicLocation(string location, int duration) {
+        musicClip = Resources.Load<AudioClip>($"music/{location.Trim()}");
+        musicClipStartTime = duration;
+
+        if (musicClip != null && audioSource != null) {
+            audioSource.clip = musicClip;
+            audioSource.time = musicClipStartTime;
+        }
+    }
+
+    public void PlayMusicClip() {
+        if (musicClip != null && audioSource != null) {
+            audioSource.clip = musicClip;
+            audioSource.time = musicClipStartTime;
+            audioSource.Play();
+        }
+    }
+
+    public void StopMusicClip() {
+        if (audioSource != null) {
+            audioSource.Stop();
+            audioSource.clip = musicClip;
+            audioSource.time = musicClipStartTime;
+        }
     }
 
     public void SetPanelFade(float alpha) {

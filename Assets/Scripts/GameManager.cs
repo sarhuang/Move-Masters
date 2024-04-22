@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
     int currentStreak = 0;
     float powerVal = 0.5f;
     float powerHitIncreaseAmount = 0.02f;
-    float pwoerMissAmount = 0.06f;
+    float powerMissAmount = 0.06f;
+    bool endSongFail = false; //Used to make the song fade out when the user fails
+    float endPitch = 0.1f;
+    float endPitchDecreaseSpeed = 1f;
     public int[] multiplierThresholds;
 
     public float totalNotes;
@@ -78,6 +81,8 @@ public class GameManager : MonoBehaviour
             noteSpawner = ns.GetComponent<NoteSpawner>();
             beatScoller = ns.GetComponent<BeatScroller>();
         }
+        noteSpawner.GetAudioSource().pitch = 1;
+        noteSpawner.GetAudioSource().volume = 1;
 
         try
         {
@@ -113,9 +118,19 @@ public class GameManager : MonoBehaviour
             }
 
             if (powerVal <= 0) {
-                noteSpawner.GetAudioSource().Stop();
+                //noteSpawner.GetAudioSource().Stop();
+                endSongFail = true;
                 noteSpawner.hasStarted = false;
                 EndGame();
+            }
+        }
+
+        if (endSongFail) {
+            if (noteSpawner.GetAudioSource().pitch > endPitch) {
+                noteSpawner.GetAudioSource().pitch = noteSpawner.GetAudioSource().pitch - endPitchDecreaseSpeed*Time.deltaTime;
+                noteSpawner.GetAudioSource().volume = noteSpawner.GetAudioSource().volume - Time.deltaTime;
+            } else {
+                noteSpawner.GetAudioSource().Stop();
             }
         }
 
@@ -298,7 +313,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Missed note");
         UpdateStreak(0);
         multiplierTracker = 0;
-        UpdatePower(powerVal-pwoerMissAmount);
+        UpdatePower(powerVal-powerMissAmount);
         missedHits++;
     }
 

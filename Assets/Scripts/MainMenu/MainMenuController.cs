@@ -13,6 +13,7 @@ public class MainMenuController : MonoBehaviour
     public TMP_Text TitleText;
     public GameObject SongPanelRef;
     public GameObject NoteSpawnerRef;
+    public AudioSource audioSource;
     LinkedList<AnimatedObject> animatedObjects;
     List<AnimatedObject> finishedAnimations;
     List<SongPanel> allSongs;
@@ -84,7 +85,7 @@ public class MainMenuController : MonoBehaviour
         //Only call this once, as it will otherwise create duplicate objects
         string[] parsedString;
         string songName, songLocation, imageLocation, musicLocation;
-        float songStartTime;
+        int songStartTime;
         TextAsset[] allSongs = Resources.LoadAll("song-selection", typeof(TextAsset)).Cast<TextAsset>().ToArray();
 
         foreach (TextAsset song in allSongs) {
@@ -99,13 +100,13 @@ public class MainMenuController : MonoBehaviour
             songLocation = parsedString[1];
             imageLocation = parsedString[2];
             musicLocation = parsedString[3];
-            songStartTime = (float)Convert.ToDecimal(parsedString[4]);
+            songStartTime = (int)Convert.ToInt32(parsedString[4]);
 
-            CreateSongPanel(songName, songLocation, imageLocation);
+            CreateSongPanel(songName, songLocation, imageLocation, songStartTime, musicLocation);
         }
 
         //SetSongDisplayPosition();
-        ChangeSongSelection(0);
+        //ChangeSongSelection(0);
     }
 
     void SetSongPanelInFocus(SongPanel song) {
@@ -114,6 +115,7 @@ public class MainMenuController : MonoBehaviour
         song.SetImageFade(1f);
         song.SetSongNameFade(1f);
         song.SetButtonState(true);
+        song.PlayMusicClip();
     }
 
     void SetSongPanelOutOfFocus(SongPanel song) {
@@ -122,13 +124,15 @@ public class MainMenuController : MonoBehaviour
         song.SetImageFade(0.5f);
         song.SetSongNameFade(0.5f);
         song.SetButtonState(false);
+        song.StopMusicClip();
     }
 
-    void CreateSongPanel(string songName, string songLocation, string imageLocation) {
+    void CreateSongPanel(string songName, string songLocation, string imageLocation, int songStartTime, string musicLocation) {
         SongPanel songPanel = Instantiate(SongPanelRef, SongSelectionScreen.transform).GetComponent<SongPanel>();
         songPanel.SetSongName(songName);
         songPanel.SetSongLocation(songLocation);
         songPanel.SetImageIcon(imageLocation);
+        songPanel.SetMusicLocation(musicLocation, songStartTime);
         allSongs.Add(songPanel);
     }
 
@@ -139,6 +143,7 @@ public class MainMenuController : MonoBehaviour
     public void OpenSongSelectionScreen() {
         TitleScreen.SetActive(false);
         SongSelectionScreen.SetActive(true);
+        ChangeSongSelection(0);
     }
 
     public void AnimateTranslateObject(GameObject obj, Vector2 startPos, Vector2 endPos, float speed) {

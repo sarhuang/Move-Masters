@@ -24,8 +24,8 @@ public class NoteObject : MonoBehaviour
         GameObject createdObj;
         Vector3 spawnPosition;
         //CHANGE THIS LINE FOR THE BUTTON
-        //if(Input.GetKeyDown(keyToPress)){
-        if(key == keyToPress){ 
+        if(Input.GetKeyDown(keyToPress)){
+        //if(key == keyToPress){ 
             if(canBePressed){
                 if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.3){
                     Debug.Log("normal hit");

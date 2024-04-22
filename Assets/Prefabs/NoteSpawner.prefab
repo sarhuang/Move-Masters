@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTempo: 0
   hasStarted: 0
+  scrollSpeed: 1.5
 --- !u!114 &6855989899771820736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,12 +68,13 @@ MonoBehaviour:
   - {fileID: 3691814472979152127, guid: 1562d4bb533bb4244a9b629a7f9af87f, type: 3}
   - {fileID: 222832028837034948, guid: ea173fa963f1a484cb2268a5643c9cf3, type: 3}
   - {fileID: 2631249755868929303, guid: cef750fbcc848fc42a49d973f3f6388a, type: 3}
-  - {fileID: 4289345469414187853, guid: 0a99f40c536af4249a00c499f23539b3, type: 3}
   - {fileID: 7008351969278261628, guid: eccddab042361be44b06aca4b9bacd12, type: 3}
+  - {fileID: 4289345469414187853, guid: 0a99f40c536af4249a00c499f23539b3, type: 3}
   - {fileID: 6549446813633294699, guid: d96d4e886ace0b54b908a8b1970fe4db, type: 3}
   - {fileID: 5424256188958774525, guid: affc7bd20bf22134f964fee276efd01e, type: 3}
   timingsFileName: alphabet
   songBPM: 0
+  musicGameMode: 
 --- !u!82 &5982288027511288604
 AudioSource:
   m_ObjectHideFlags: 0

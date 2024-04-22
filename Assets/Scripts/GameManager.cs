@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     string scorePadding = "00000000";
     public TMP_Text multiplierText;
     public TMP_Text streakText;
+    float defaultStreakFontSize;
+    float streakFontGrowSize = 5;
+    float streakFontGrowSpeed = 20;
     public Slider powerBar;
     public Color highPowerColor;
     public Color lowPowerColor;
@@ -64,6 +67,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManger start!");
         instance = this;
         currentMultiplier = 1;
+        defaultStreakFontSize = streakText.fontSize;
+        resultsScreen.SetActive(false);
         UpdateScoreText();
         UpdateStreak(0);
         UpdatePower(0.5f);
@@ -115,6 +120,8 @@ public class GameManager : MonoBehaviour
         }
 
         ArduinoToKeyVal();
+        ApplyPowerbarRainbowEffect();
+        ApplyStreakTextAnimation();
     }
 
     public void EndGame() {
@@ -218,14 +225,34 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdatePower(float val) {
-        powerVal = val;
+        if (val > 1) {
+            powerVal = 1;
+        } else {
+            powerVal = val;
+        }
+
         powerBar.value = powerVal;
-        powerBar.fillRect.GetComponent<Image>().color = Color.Lerp(lowPowerColor, highPowerColor, powerVal);
+        if (powerVal < 1) {
+            powerBar.fillRect.GetComponent<Image>().color = Color.Lerp(lowPowerColor, highPowerColor, powerVal);
+        }
+    }
+
+    public void ApplyPowerbarRainbowEffect() {
+        if (powerVal >= 1) {
+            powerBar.fillRect.GetComponent<Image>().color = Color.Lerp(Color.green, Color.cyan, Mathf.PingPong(Time.time, 1));
+        }
+    }
+
+    public void ApplyStreakTextAnimation() {
+        if (streakText.fontSize != defaultStreakFontSize) {
+            streakText.fontSize = Mathf.Lerp(streakText.fontSize, defaultStreakFontSize, 0.5f*Time.deltaTime*streakFontGrowSpeed);
+        }
     }
 
     public void UpdateStreak(int val) {
         int threshold;
 
+        streakText.fontSize = defaultStreakFontSize+streakFontGrowSize;
         currentStreak = val;
         if (currentStreak == 0) {
             currentMultiplier = 1;
@@ -303,5 +330,9 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu() {
         Destroy(noteSpawner.gameObject); //This prevents a bug that can happen if we then try to go select another song after exiting
         SceneManager.LoadScene(0);
+    }
+
+    public void PlaySongAgain() {
+        SceneManager.LoadScene(1);
     }
 }

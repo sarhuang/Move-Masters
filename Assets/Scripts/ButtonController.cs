@@ -38,14 +38,14 @@ public class ButtonController : MonoBehaviour
         button9 = l*/
         KeyCode key = GameManager.GetKeyVal();
         //CHANGE THIS LINE FOR THE BUTTON
-        //if(Input.GetKeyDown(keyToPress)){
-        if(key == keyToPress){
+        if(Input.GetKeyDown(keyToPress)){
+        //if(key == keyToPress){
             Debug.Log(key + " pressed down");
             spriteRenderer.sprite = pressedImage;
         }    
         //CHANGE THIS LINE FOR THE BUTTON
-        //if(Input.GetKeyUp(keyToPress)){
-        if(key != keyToPress){
+        if(Input.GetKeyUp(keyToPress)){
+        //if(key != keyToPress){
             Debug.Log(key + " key off");
             spriteRenderer.sprite = defaultImage;
         }

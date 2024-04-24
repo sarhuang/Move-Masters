@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     int currentStreak = 0;
     float powerVal = 0.5f;
     float powerHitIncreaseAmount = 0.02f;
-    float powerMissAmount = 0.3f; //0.06f;
+    float powerMissAmount = 0.06f;
     float endPitch = 0.1f;
     float endPitchDecreaseSpeed = 1f;
     float resultScreenFadeSpeed = 3f;

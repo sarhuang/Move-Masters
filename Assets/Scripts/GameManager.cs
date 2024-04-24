@@ -27,10 +27,13 @@ public class GameManager : MonoBehaviour
     int currentStreak = 0;
     float powerVal = 0.5f;
     float powerHitIncreaseAmount = 0.02f;
-    float powerMissAmount = 0.06f;
-    bool endSongFail = false; //Used to make the song fade out when the user fails
+    float powerMissAmount = 0.3f; //0.06f;
     float endPitch = 0.1f;
     float endPitchDecreaseSpeed = 1f;
+    float resultScreenFadeSpeed = 3f;
+    bool endSongFail = false; //Used to make the song fade out when the user fails
+    bool fadeInResultScreen = false;
+    Image resultScreenImage;
     public int[] multiplierThresholds;
 
     public float totalNotes;
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         currentMultiplier = 1;
         defaultStreakFontSize = streakText.fontSize;
         resultsScreen.SetActive(false);
+        resultScreenImage = resultsScreen.GetComponent<Image>();;
         UpdateScoreText();
         UpdateStreak(0);
         UpdatePower(0.5f);
@@ -134,13 +138,41 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (fadeInResultScreen && resultScreenImage.color.a < 1) {
+            SetResultFade(resultScreenImage.color.a + resultScreenFadeSpeed*Time.deltaTime);
+        }
+
         ArduinoToKeyVal();
         ApplyPowerbarRainbowEffect();
         ApplyStreakTextAnimation();
     }
 
+    void SetResultFade(float a) {
+        Image[] childrenImages = resultsScreen.GetComponentsInChildren<Image>();
+        TMP_Text[] allTextTMP = resultsScreen.GetComponentsInChildren<TMP_Text>();
+        Text[] allText = resultsScreen.GetComponentsInChildren<Text>();
+
+        resultScreenImage.color = new Color(resultScreenImage.color.r, resultScreenImage.color.g, resultScreenImage.color.b, a);
+        foreach (Image i in childrenImages) {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, a);
+        }
+
+        foreach (TMP_Text i in allTextTMP) {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, a);
+        }
+
+        foreach (Text i in allText) {
+            i.color = new Color(i.color.r, i.color.g, i.color.b, a);
+        }
+    }
+
     public void EndGame() {
-        resultsScreen.SetActive(true);
+        if (!fadeInResultScreen) {
+            SetResultFade(0);
+            resultsScreen.SetActive(true);
+            fadeInResultScreen = true;
+        }
+
         normalsText.text = normalHits.ToString();
         goodsText.text = goodHits.ToString();
         perfectsText.text = perfectHits.ToString();
@@ -223,15 +255,6 @@ public class GameManager : MonoBehaviour
     public void NoteHit()
     {
         Debug.Log("Hit on time");
-        // if (currentMultiplier - 1 < multiplierThresholds.Length)
-        // {
-        //     multiplierTracker++;
-        //     if (multiplierThresholds[currentMultiplier - 1] <= multiplierTracker)
-        //     {
-        //         multiplierTracker = 0;
-        //         currentMultiplier++;
-        //     }
-        // }
         UpdateStreak(currentStreak+1);
         UpdatePower(powerVal+powerHitIncreaseAmount);
         UpdateScoreText();

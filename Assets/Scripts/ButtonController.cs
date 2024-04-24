@@ -11,7 +11,7 @@ public class ButtonController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite defaultImage;
     public Sprite pressedImage;
-    public KeyCode keyToPress;
+    public ButtonMap keyToPress;
     static string[] ddrArrows = new string[4]{"Left_Arrow", "Down_Arrow", "Up_Arrow", "Right_Arrow"};
     static string[] piuArrows = new string[5]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Center_Button", "Top_Right_Arrow", "Bottom_Right_Arrow"};
     static float zPos = 8;
@@ -27,27 +27,26 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*button1 = a
-        button2 = s
-        button3 = d
-        button4 = f
-        button5 = g
-        button6 = h
-        button7 = j
-        button8 = k
-        button9 = l*/
         KeyCode key = GameManager.GetKeyVal();
-        //CHANGE THIS LINE FOR THE BUTTON
-        if(Input.GetKeyDown(keyToPress)){
-        //if(key == keyToPress){
-            Debug.Log(key + " pressed down");
-            spriteRenderer.sprite = pressedImage;
-        }    
-        //CHANGE THIS LINE FOR THE BUTTON
-        if(Input.GetKeyUp(keyToPress)){
-        //if(key != keyToPress){
-            Debug.Log(key + " key off");
-            spriteRenderer.sprite = defaultImage;
+
+        if (GameManager.instance.SerialPortIsActive()) {
+            //This is for the DDR board
+            if (key == (KeyCode)keyToPress) {
+                Debug.Log(key + " pressed down");
+                spriteRenderer.sprite = pressedImage;
+            } else if (key != (KeyCode)keyToPress) {
+                Debug.Log(key + " key off");
+                spriteRenderer.sprite = defaultImage;
+            }
+        } else {
+            //This is for playing with Keyboard and Mouse
+            if (Input.GetKeyDown((KeyCode)keyToPress)) {
+                Debug.Log(key + " pressed down");
+                spriteRenderer.sprite = pressedImage;
+            } else if (Input.GetKeyUp((KeyCode)keyToPress)) {
+                Debug.Log(key + " key off");
+                spriteRenderer.sprite = defaultImage;
+            }
         }
     }
 

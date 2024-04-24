@@ -33,10 +33,10 @@ public class NoteSpawner : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         spawnedNotes = new List<NoteObject>();
-        LoadSpawnTimes();
+        //LoadSpawnTimes();
     }
 
-    void LoadSpawnTimes()
+    public void LoadSpawnTimes()
     {
         // Load the text file containing timings from Resources folder
         TextAsset timingTextAsset = Resources.Load<TextAsset>($@"song-files/{timingsFileName}");
@@ -92,6 +92,9 @@ public class NoteSpawner : MonoBehaviour
         } else {
             Debug.LogError($"Unable to open music file {musicFileName}");
         }
+
+        currentSpawnIndex = 0;
+        elapsedTime = 0;
     }
 
     void Update()

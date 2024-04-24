@@ -5,55 +5,61 @@ using UnityEngine;
 public class NoteObject : MonoBehaviour
 {
     public bool canBePressed;
-    public KeyCode keyToPress;
+    public ButtonMap keyToPress;
     public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
     public NoteSpawner ns = null;
     readonly float heightThreshold = 11; //Notes above this y position will get destroyed
     float heightOffset = 7f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
         KeyCode key = GameManager.GetKeyVal();
-        GameObject createdObj;
-        Vector3 spawnPosition;
-        //CHANGE THIS LINE FOR THE BUTTON
-        if(Input.GetKeyDown(keyToPress)){
-        //if(key == keyToPress){ 
-            if(canBePressed){
-                if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.3){
-                    Debug.Log("normal hit");
-                    GameManager.instance.NormalHit();
-                    spawnPosition = new Vector3(0.26f, 3.0f, 0.0f);
-                    createdObj = Instantiate(hitEffect, GameManager.instance.buttonSpawnLocation);
-                }
-                else if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.15){
-                    Debug.Log("good hit");
-                    GameManager.instance.GoodHit();
-                    spawnPosition = new Vector3(0.44f, 3.0f, 0.0f);
-                    createdObj = Instantiate(goodEffect, GameManager.instance.buttonSpawnLocation);
-                }
-                else{
-                    Debug.Log("perfect hit");
-                    GameManager.instance.PerfectHit();
-                    spawnPosition = new Vector3(0.3f, 3.0f, 0.0f);
-                    createdObj = Instantiate(perfectEffect, GameManager.instance.buttonSpawnLocation);
-                }
-                createdObj.transform.localPosition = spawnPosition;
 
-                gameObject.SetActive(false); //We have to set it to inactive or it will count as a miss
-                DestroyNote();
+        if (GameManager.instance.SerialPortIsActive()) {
+            // This is for the DDR board
+            if (key == (KeyCode)keyToPress) {
+                CheckForNoteHit();
+            }
+        } else {
+            //This is for keyboard and mouse
+            if (Input.GetKeyDown((KeyCode)keyToPress)) {
+                CheckForNoteHit();
             }
         }
 
         //This cleans up notes that get too far off the screen
         if (transform.position.y > heightThreshold) {
+            DestroyNote();
+        }
+    }
+
+    void CheckForNoteHit() {
+        GameObject createdObj;
+        Vector3 spawnPosition;
+
+        if(canBePressed){
+            if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.3){
+                Debug.Log("normal hit");
+                GameManager.instance.NormalHit();
+                spawnPosition = new Vector3(0.26f, 3.0f, 0.0f);
+                createdObj = Instantiate(hitEffect, GameManager.instance.buttonSpawnLocation);
+            }
+            else if(Mathf.Abs(transform.localPosition.y - heightOffset) > 0.15){
+                Debug.Log("good hit");
+                GameManager.instance.GoodHit();
+                spawnPosition = new Vector3(0.44f, 3.0f, 0.0f);
+                createdObj = Instantiate(goodEffect, GameManager.instance.buttonSpawnLocation);
+            }
+            else{
+                Debug.Log("perfect hit");
+                GameManager.instance.PerfectHit();
+                spawnPosition = new Vector3(0.3f, 3.0f, 0.0f);
+                createdObj = Instantiate(perfectEffect, GameManager.instance.buttonSpawnLocation);
+            }
+            createdObj.transform.localPosition = spawnPosition;
+
+            gameObject.SetActive(false); //We have to set it to inactive or it will count as a miss
             DestroyNote();
         }
     }

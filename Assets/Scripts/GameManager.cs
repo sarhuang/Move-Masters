@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
     public void StartSong() {
         startSong = true;
         beatScoller.hasStarted = true;
+        noteSpawner.LoadSpawnTimes();
         noteSpawner.hasStarted = true;
         noteSpawner.GetAudioSource().Play();
     }
@@ -207,8 +208,9 @@ public class GameManager : MonoBehaviour
                 keyToPress = KeyCode.None;
             }
         }
-        catch (TimeoutException e)
+        catch (TimeoutException)
         {
+
         }
     }
 
@@ -320,6 +322,10 @@ public class GameManager : MonoBehaviour
     public void SetNoteSpawner(NoteSpawner ns) {
         noteSpawner = ns;
         beatScoller = ns.GetComponent<BeatScroller>();
+    }
+
+    public bool SerialPortIsActive() {
+        return serialPort.IsOpen && !serialPortError;
     }
 
     public void SetGameMode(string mode) {

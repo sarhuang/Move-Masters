@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Play Song
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 33e3d7cf4d552499e8b330e88ea1f805, type: 2}
-  m_sharedMaterial: {fileID: -3695043746398731804, guid: 33e3d7cf4d552499e8b330e88ea1f805, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9df5eed63f458414fb8095d17095327e, type: 2}
+  m_sharedMaterial: {fileID: 4638318769833506177, guid: 9df5eed63f458414fb8095d17095327e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5330188, g: 0.8178164, b: 1, a: 0.392}
+  m_Color: {r: 0.21509439, g: 0.21509439, b: 0.21509439, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -603,8 +603,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Song Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 33e3d7cf4d552499e8b330e88ea1f805, type: 2}
-  m_sharedMaterial: {fileID: -3695043746398731804, guid: 33e3d7cf4d552499e8b330e88ea1f805, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9df5eed63f458414fb8095d17095327e, type: 2}
+  m_sharedMaterial: {fileID: 4638318769833506177, guid: 9df5eed63f458414fb8095d17095327e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

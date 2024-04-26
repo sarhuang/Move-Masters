@@ -14,18 +14,19 @@ public class NoteObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        KeyCode key = GameManager.GetKeyVal();
+        List<KeyCode> keys = GameManager.GetKeyVal();
 
-        if (GameManager.instance.SerialPortIsActive()) {
-            // This is for the DDR board
-            if (key == (KeyCode)keyToPress) {
-                CheckForNoteHit();
+        foreach (KeyCode key in keys) {
+            if (GameManager.instance.SerialPortIsActive()) {
+                // This is for the DDR board
+                if (key == (KeyCode)keyToPress) {
+                    CheckForNoteHit();
+                }
             }
-        } else {
-            //This is for keyboard and mouse
-            if (Input.GetKeyDown((KeyCode)keyToPress)) {
-                CheckForNoteHit();
-            }
+        }
+        
+        if (Input.GetKeyDown((KeyCode)keyToPress)) {
+            CheckForNoteHit();
         }
 
         //This cleans up notes that get too far off the screen

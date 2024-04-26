@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     static SerialPort serialPort = new("COM10", 9600);
     static bool serialPortError = false;
-    static KeyCode keyToPress = KeyCode.None;
+    static List<KeyCode> keyToPress;
 
 
     // Start is called before the first frame update
@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameManger start!");
         instance = this;
+        keyToPress = new List<KeyCode>();
         currentMultiplier = 1;
         defaultStreakFontSize = streakText.fontSize;
         resultsScreen.SetActive(false);
@@ -226,18 +227,16 @@ public class GameManager : MonoBehaviour
 
         serialPort.ReadTimeout = 1;
         serialPort.DtrEnable = true;
+        keyToPress.Clear();
 
         try
         {
-            string dataFromArduinoString = serialPort.ReadLine();
-            char keyCodeValue;
-            if (char.TryParse(dataFromArduinoString, out keyCodeValue))
-            {
-                keyToPress = (KeyCode)keyCodeValue;
-            }
-            else
-            {
-                keyToPress = KeyCode.None;
+            string dataFromArduinoString = serialPort.ReadLine().Trim();
+
+            foreach (char k in dataFromArduinoString) {
+                if (k != '-') {
+                    keyToPress.Add((KeyCode)k);
+                }
             }
         }
         catch (TimeoutException)
@@ -246,7 +245,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static KeyCode GetKeyVal()
+    public static List<KeyCode> GetKeyVal()
     {
         return keyToPress;
     }

@@ -27,26 +27,28 @@ public class ButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        KeyCode key = GameManager.GetKeyVal();
+        List<KeyCode> keys = GameManager.GetKeyVal();
 
-        if (GameManager.instance.SerialPortIsActive()) {
-            //This is for the DDR board
-            if (key == (KeyCode)keyToPress) {
-                Debug.Log(key + " pressed down");
-                spriteRenderer.sprite = pressedImage;
-            } else if (key != (KeyCode)keyToPress) {
-                Debug.Log(key + " key off");
-                spriteRenderer.sprite = defaultImage;
+        foreach (KeyCode key in keys) {
+            if (GameManager.instance.SerialPortIsActive()) {
+                //This is for the DDR board
+                if (key == (KeyCode)keyToPress) {
+                    Debug.Log(key + " pressed down");
+                    spriteRenderer.sprite = pressedImage;
+                } else if (key != (KeyCode)keyToPress) {
+                    Debug.Log(key + " key off");
+                    spriteRenderer.sprite = defaultImage;
+                }
             }
-        } else {
-            //This is for playing with Keyboard and Mouse
-            if (Input.GetKeyDown((KeyCode)keyToPress)) {
-                Debug.Log(key + " pressed down");
-                spriteRenderer.sprite = pressedImage;
-            } else if (Input.GetKeyUp((KeyCode)keyToPress)) {
-                Debug.Log(key + " key off");
-                spriteRenderer.sprite = defaultImage;
-            }
+        }
+
+        //This is for playing with Keyboard and Mouse
+        if (Input.GetKeyDown((KeyCode)keyToPress)) {
+            Debug.Log(keyToPress + " pressed down");
+            spriteRenderer.sprite = pressedImage;
+        } else if (Input.GetKeyUp((KeyCode)keyToPress)) {
+            Debug.Log(keyToPress + " key off");
+            spriteRenderer.sprite = defaultImage;
         }
     }
 

@@ -28,11 +28,11 @@ public class ButtonController : MonoBehaviour
     void Update()
     {
         List<KeyCode> keys = GameManager.GetKeyVal();
-
+        print(keys);
         foreach (KeyCode key in keys) {
             if (GameManager.instance.SerialPortIsActive()) {
                 //This is for the DDR board
-                if (key == (KeyCode)keyToPress) {
+                if(key == (KeyCode)keyToPress) {
                     Debug.Log(key + " pressed down");
                     spriteRenderer.sprite = pressedImage;
                 } else if (key != (KeyCode)keyToPress) {
@@ -41,15 +41,20 @@ public class ButtonController : MonoBehaviour
                 }
             }
         }
+        
+        
 
-        //This is for playing with Keyboard and Mouse
-        if (Input.GetKeyDown((KeyCode)keyToPress)) {
-            Debug.Log(keyToPress + " pressed down");
-            spriteRenderer.sprite = pressedImage;
-        } else if (Input.GetKeyUp((KeyCode)keyToPress)) {
-            Debug.Log(keyToPress + " key off");
-            spriteRenderer.sprite = defaultImage;
-        }
+        if(!GameManager.instance.SerialPortIsActive()) {
+            Debug.Log("Keyboard time!");
+            //This is for playing with Keyboard and Mouse
+            if (Input.GetKeyDown((KeyCode)keyToPress)) {
+                Debug.Log(keyToPress + " pressed down");
+                spriteRenderer.sprite = pressedImage;
+            } else if (Input.GetKeyUp((KeyCode)keyToPress)) {
+                Debug.Log(keyToPress + " key off");
+                spriteRenderer.sprite = defaultImage;
+            }
+        }        
     }
 
     public static void ChangeArrowMode(string mode, string name, Transform t, float yaxis) {

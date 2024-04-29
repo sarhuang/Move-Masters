@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,6 +12,7 @@ public class SongPanel : MonoBehaviour
     string songName = null;
     string songLocation = null;
     public TMP_Text SongNameText;
+    public TMP_Text SongLengthText;
     public Image PanelRef;
     public Image ImageRef;
     public Button ButtonRef;
@@ -34,7 +36,13 @@ public class SongPanel : MonoBehaviour
         if (musicClip != null && audioSource != null) {
             audioSource.clip = musicClip;
             audioSource.time = musicClipStartTime;
+            SongLengthText.text = ConvertSecondsToTime(audioSource.clip.length);
         }
+    }
+
+    string ConvertSecondsToTime(float time) {
+        TimeSpan t = TimeSpan.FromSeconds(time);
+        return String.Format("{0:D2}m:{1:D2}s", t.Minutes, t.Seconds);
     }
 
     public void PlayMusicClip() {

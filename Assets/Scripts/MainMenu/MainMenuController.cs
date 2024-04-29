@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     public static MainMenuController m;
     public GameObject TitleScreen;
     public GameObject SongSelectionScreen;
-    public TMP_Text TitleText;
+    public Image TitleLogo;
     public GameObject SongPanelRef;
     public GameObject NoteSpawnerRef;
     public AudioSource audioSource;
@@ -22,8 +23,8 @@ public class MainMenuController : MonoBehaviour
 
     void Start() {
         m = this;
-        Vector2 titleStartPos = new Vector2(TitleText.transform.position.x, TitleText.transform.position.y+400);
-        Vector2 titleEndPos = new Vector2(TitleText.transform.position.x, TitleText.transform.position.y);
+        Vector2 titleStartPos = new Vector2(TitleLogo.transform.position.x, TitleLogo.transform.position.y+400);
+        Vector2 titleEndPos = new Vector2(TitleLogo.transform.position.x, TitleLogo.transform.position.y);
 
         animatedObjects = new LinkedList<AnimatedObject>();
         finishedAnimations = new List<AnimatedObject>();
@@ -32,7 +33,7 @@ public class MainMenuController : MonoBehaviour
         TitleScreen.SetActive(true);
         SongSelectionScreen.SetActive(false);
 
-        AnimateTranslateObject(TitleText.gameObject, titleStartPos, titleEndPos, 2f);
+        AnimateTranslateObject(TitleLogo.gameObject, titleStartPos, titleEndPos, 2f);
         LoadAllSongs();
     }
 

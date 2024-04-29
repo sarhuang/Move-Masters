@@ -15,6 +15,7 @@ public class ButtonController : MonoBehaviour
     static string[] ddrArrows = new string[4]{"Left_Arrow", "Down_Arrow", "Up_Arrow", "Right_Arrow"};
     static string[] piuArrows = new string[5]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Center_Button", "Top_Right_Arrow", "Bottom_Right_Arrow"};
     static float zPos = 8;
+    bool buttonPressed = false;
     //string[] mixArrows = new string[9]{"Bottom_Left_Arrow", "Top_Left_Arrow", "Left_Arrow", "Down_Arrow", "Center Button", "Up_Arrow", "Right_Arrow", "Top_Right_Arrow", "Bottom_Left_Arrow"};
    
     // Start is called before the first frame update
@@ -28,21 +29,21 @@ public class ButtonController : MonoBehaviour
     void Update()
     {
         List<KeyCode> keys = GameManager.GetKeyVal();
-        print(keys);
+        buttonPressed = false;
+
         foreach (KeyCode key in keys) {
             if (GameManager.instance.SerialPortIsActive()) {
                 //This is for the DDR board
                 if(key == (KeyCode)keyToPress) {
                     Debug.Log(key + " pressed down");
                     spriteRenderer.sprite = pressedImage;
-                } else if (key != (KeyCode)keyToPress) {
+                    buttonPressed = true;
+                } else if (key != (KeyCode)keyToPress && !buttonPressed) {
                     Debug.Log(key + " key off");
                     spriteRenderer.sprite = defaultImage;
                 }
             }
         }
-        
-        
 
         if(!GameManager.instance.SerialPortIsActive()) {
             Debug.Log("Keyboard time!");

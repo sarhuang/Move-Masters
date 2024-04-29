@@ -46,7 +46,6 @@ public class ButtonController : MonoBehaviour
         }
 
         if(!GameManager.instance.SerialPortIsActive()) {
-            Debug.Log("Keyboard time!");
             //This is for playing with Keyboard and Mouse
             if (Input.GetKeyDown((KeyCode)keyToPress)) {
                 Debug.Log(keyToPress + " pressed down");

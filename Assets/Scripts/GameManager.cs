@@ -173,7 +173,6 @@ public class GameManager : MonoBehaviour
             resultsScreen.SetActive(true);
             fadeInResultScreen = true;
         }
-
         normalsText.text = normalHits.ToString();
         goodsText.text = goodHits.ToString();
         perfectsText.text = perfectHits.ToString();

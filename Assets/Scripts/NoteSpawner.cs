@@ -175,3 +175,15 @@ public class NoteSpawner : MonoBehaviour
         return audioSource;
     }
 }
+
+public enum Difficulty {
+    EASY = 0,
+    MEDIUM,
+    HARD
+}
+
+public enum GameMode {
+    FULL = 0,
+    DDR,
+    PIU
+}

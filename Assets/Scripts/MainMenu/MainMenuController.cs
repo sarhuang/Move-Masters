@@ -14,11 +14,15 @@ public class MainMenuController : MonoBehaviour
     public Image TitleLogo;
     public GameObject SongPanelRef;
     public GameObject NoteSpawnerRef;
-    public AudioSource audioSource;
+    public TMP_Text DifficultyText;
+    public TMP_Text ModeText;
+
     LinkedList<AnimatedObject> animatedObjects;
     List<AnimatedObject> finishedAnimations;
     List<SongPanel> allSongs;
     int songSelectionIndex = 0;
+    Difficulty selectedDifficulty;
+    GameMode selectedGameMode;
     readonly int songDisplacement = 400; //Distance between song panels
 
     void Awake() {
@@ -37,6 +41,8 @@ public class MainMenuController : MonoBehaviour
 
         TitleScreen.SetActive(true);
         SongSelectionScreen.SetActive(false);
+
+        SetDifficulty(Difficulty.EASY);
 
         AnimateTranslateObject(TitleLogo.gameObject, titleStartPos, titleEndPos, 2f);
         LoadAllSongs();
@@ -83,6 +89,10 @@ public class MainMenuController : MonoBehaviour
             NextSong();
         } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             PreviousSong();
+        } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            IncrementDifficulty();
+        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            IncrementGameMode();
         }
 
         if (SerialController.SerialPortIsActive()) {
@@ -98,6 +108,56 @@ public class MainMenuController : MonoBehaviour
 
     public void PreviousSong() {
         ChangeSongSelection(songSelectionIndex-1);
+    }
+
+    public void IncrementDifficulty() {
+        int nextDifficulty = (int)selectedDifficulty+1;
+        if (nextDifficulty >= 3) {
+            nextDifficulty = 0;
+        }
+
+        SetDifficulty((Difficulty)nextDifficulty);
+    }
+
+    public void IncrementGameMode() {
+        int nextMode = (int)selectedGameMode+1;
+        if (nextMode >= 3) {
+            nextMode = 0;
+        }
+
+        SetGameMode((GameMode)nextMode);
+    }
+
+    public void SetDifficulty(Difficulty dif) {
+        selectedDifficulty = dif;
+
+        switch (dif) {
+            case Difficulty.EASY:
+                DifficultyText.text = "Easy";
+                break;
+            case Difficulty.MEDIUM:
+                DifficultyText.text = "Medium";
+                break;
+            case Difficulty.HARD:
+                DifficultyText.text = "Hard";
+                break;
+        }
+    }
+
+    public void SetGameMode(GameMode gm) {
+        selectedGameMode = gm;
+
+        switch (gm) {
+            case GameMode.FULL:
+                ModeText.text = "Full";
+                break;
+            case GameMode.DDR:
+                ModeText.text = "DDR";
+                break;
+            case GameMode.PIU:
+                ModeText.text = "PIU";
+                break;
+        }
     }
 
     public void CleanUpEvents() {

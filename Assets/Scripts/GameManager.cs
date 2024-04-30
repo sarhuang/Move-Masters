@@ -62,8 +62,6 @@ public class GameManager : MonoBehaviour
     public Color highPowerColor;
     public Color lowPowerColor;
 
-    static SerialPort serialPort = new("COM10", 9600);
-    static bool serialPortError = false;
     static List<KeyCode> keyToPress;
 
 
@@ -88,24 +86,6 @@ public class GameManager : MonoBehaviour
         }
         noteSpawner.GetAudioSource().pitch = 1;
         noteSpawner.GetAudioSource().volume = 1;
-
-        try
-        {
-            if (serialPort.IsOpen)
-            {
-                serialPort.Close();
-            }
-            serialPort.Open();
-            if (serialPort.IsOpen)
-            {
-                Debug.Log("Serial port is open!");
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"Serial Port Open Error: {ex.Message}");
-            serialPortError = true;
-        }
 
         SetGameMode(noteSpawner.musicGameMode);
         StartSong();
@@ -219,28 +199,16 @@ public class GameManager : MonoBehaviour
 
     public void ArduinoToKeyVal()
     {
-        if (serialPortError) {
+        if (!SerialController.SerialPortIsActive()) {
             //TODO: Read input from keyboard instead
             return;
         }
 
-        serialPort.ReadTimeout = 1;
-        serialPort.DtrEnable = true;
         keyToPress.Clear();
 
-        try
-        {
-            string dataFromArduinoString = serialPort.ReadLine().Trim();
-
-            foreach (char k in dataFromArduinoString) {
-                if (k != '-') {
-                    keyToPress.Add((KeyCode)k);
-                }
-            }
-        }
-        catch (TimeoutException)
-        {
-
+        List<ButtonMap> dataFromArduinoString = SerialController.ReadLine();
+        foreach (ButtonMap k in dataFromArduinoString) {
+            keyToPress.Add((KeyCode)k);
         }
     }
 
@@ -343,10 +311,6 @@ public class GameManager : MonoBehaviour
     public void SetNoteSpawner(NoteSpawner ns) {
         noteSpawner = ns;
         beatScoller = ns.GetComponent<BeatScroller>();
-    }
-
-    public bool SerialPortIsActive() {
-        return serialPort.IsOpen && !serialPortError;
     }
 
     public void SetGameMode(string mode) {

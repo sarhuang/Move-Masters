@@ -96,6 +96,7 @@ public class SongPanel : MonoBehaviour
         //TODO: Check if note spawner already exists, if it does change the song it loaded
         ns = Instantiate(MainMenuController.m.NoteSpawnerRef).GetComponent<NoteSpawner>();
         ns.LoadSongFile(songLocation);
+        MainMenuController.m.CleanUpEvents();
         DontDestroyOnLoad(ns.gameObject);
         SceneManager.LoadScene(1);
     }

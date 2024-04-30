@@ -17,7 +17,7 @@ public class NoteObject : MonoBehaviour
         List<KeyCode> keys = GameManager.GetKeyVal();
 
         foreach (KeyCode key in keys) {
-            if (GameManager.instance.SerialPortIsActive()) {
+            if (SerialController.SerialPortIsActive()) {
                 // This is for the DDR board
                 if (key == (KeyCode)keyToPress) {
                     CheckForNoteHit();

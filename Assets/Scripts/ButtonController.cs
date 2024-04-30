@@ -32,7 +32,7 @@ public class ButtonController : MonoBehaviour
         buttonPressed = false;
 
         foreach (KeyCode key in keys) {
-            if (GameManager.instance.SerialPortIsActive()) {
+            if (SerialController.SerialPortIsActive()) {
                 //This is for the DDR board
                 if(key == (KeyCode)keyToPress) {
                     Debug.Log(key + " pressed down");
@@ -45,7 +45,7 @@ public class ButtonController : MonoBehaviour
             }
         }
 
-        if(!GameManager.instance.SerialPortIsActive()) {
+        if(!SerialController.SerialPortIsActive()) {
             //This is for playing with Keyboard and Mouse
             if (Input.GetKeyDown((KeyCode)keyToPress)) {
                 Debug.Log(keyToPress + " pressed down");

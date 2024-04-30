@@ -21,6 +21,11 @@ public class MainMenuController : MonoBehaviour
     int songSelectionIndex = 0;
     readonly int songDisplacement = 400; //Distance between song panels
 
+    void Awake() {
+        SerialController.SerialError += c_SerialError;
+        SerialController.ButtonPress += c_ButtonPressed;
+    }
+
     void Start() {
         m = this;
         Vector2 titleStartPos = new Vector2(TitleLogo.transform.position.x, TitleLogo.transform.position.y+400);
@@ -35,6 +40,25 @@ public class MainMenuController : MonoBehaviour
 
         AnimateTranslateObject(TitleLogo.gameObject, titleStartPos, titleEndPos, 2f);
         LoadAllSongs();
+    }
+
+    void c_SerialError(object sender, ButtonPressEventArgs e) {
+        //Debug.LogError("Serial Error received!");
+    }
+
+    void c_ButtonPressed(object sender, ButtonPressEventArgs e) {
+        List<ButtonMap> pressed = e.buttons;
+
+        foreach (ButtonMap b in pressed) {
+            switch (b) {
+                case ButtonMap.RIGHT_ARROW:
+                    NextSong();
+                    break;
+                case ButtonMap.LEFT_ARROW:
+                    PreviousSong();
+                    break;
+            }
+        }
     }
 
     void Update() {
@@ -56,10 +80,30 @@ public class MainMenuController : MonoBehaviour
 
         //TODO: Replace this with serial input from the board
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            ChangeSongSelection(songSelectionIndex+1);
+            NextSong();
         } else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            ChangeSongSelection(songSelectionIndex-1);
+            PreviousSong();
         }
+
+        if (SerialController.SerialPortIsActive()) {
+            //Since we are using events, we just need to read the events to respond to input
+            //Yes it's overkill and we could just interpret the presses here, but I wanted to learn events
+            SerialController.ReadLine();
+        }
+    }
+
+    public void NextSong() {
+        ChangeSongSelection(songSelectionIndex+1);
+    }
+
+    public void PreviousSong() {
+        ChangeSongSelection(songSelectionIndex-1);
+    }
+
+    public void CleanUpEvents() {
+        //This must be called before any scene changes
+        SerialController.SerialError -= c_SerialError;
+        SerialController.ButtonPress -= c_ButtonPressed;
     }
 
     //Changes the current song panel on the song selection page
@@ -142,6 +186,7 @@ public class MainMenuController : MonoBehaviour
     }
 
     public void OpenSongSelectionScreen() {
+        SerialController.SerialPortIsActive();
         TitleScreen.SetActive(false);
         SongSelectionScreen.SetActive(true);
         ChangeSongSelection(0);

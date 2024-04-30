@@ -16,10 +16,12 @@ public class NoteSpawner : MonoBehaviour
 
     private float elapsedTime = 0.0f;
     private int currentSpawnIndex = 0;
+    int noteSkip = 0; //This is used for the difficulty
     AudioSource audioSource;
     string musicFileName;
     List<NoteObject> spawnedNotes;
-    public string musicGameMode;
+    public GameMode musicGameMode;
+    public Difficulty difficulty;
 
     void Awake() {
         //This code checks and makes sure a NoteSpawner doesn't already exist. If it does, it gets destroyed
@@ -66,7 +68,6 @@ public class NoteSpawner : MonoBehaviour
         }
         
         musicFileName = lines[1].Trim();
-        musicGameMode = lines[2].Trim();
 
         spawnTimes = new float[lines.Length-3];
         noteTypes = new string[lines.Length-3];
@@ -117,6 +118,19 @@ public class NoteSpawner : MonoBehaviour
         }
     }
 
+    bool SkipNote() {
+        switch (difficulty) {
+            case Difficulty.HARD:
+                return false;
+            case Difficulty.MEDIUM:
+                return noteSkip%2 == 0; //Skips every other note
+            case Difficulty.EASY:
+                return noteSkip%3 > 0; //Skips every 2 notes
+        }
+
+        return false;
+    }
+
     void SpawnNote()
     {
         if (notePrefabs.Length == 0)
@@ -141,6 +155,9 @@ public class NoteSpawner : MonoBehaviour
             Debug.LogError("Failed to find prefab for note type: " + noteTypes[currentSpawnIndex]);
             return;
         }
+
+        noteSkip += 1;
+        if (SkipNote()) return;
 
         // Spawn the selected note prefab at the spawn point
         GameObject newNote = Instantiate(notePrefabs[prefabIndex], GameManager.instance.buttonSpawnLocation);

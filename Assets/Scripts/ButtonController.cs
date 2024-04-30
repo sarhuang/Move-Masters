@@ -57,8 +57,8 @@ public class ButtonController : MonoBehaviour
         }        
     }
 
-    public static void ChangeArrowMode(string mode, string name, Transform t, float yaxis) {
-        if(mode == "ddr"){
+    public static void ChangeArrowMode(GameMode mode, string name, Transform t, float yaxis) {
+        if(mode == GameMode.DDR){
             if(name == ddrArrows[0]){
                 t.localPosition = new Vector3(-8f, yaxis, zPos);
             }
@@ -75,7 +75,7 @@ public class ButtonController : MonoBehaviour
                 Destroy(t.gameObject);
             }
         }
-        else if(mode == "piu"){
+        else if(mode == GameMode.PIU){
             if(name == piuArrows[0]){
                 t.localPosition = new Vector3(-4f, yaxis, zPos);
             }

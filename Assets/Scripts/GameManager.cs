@@ -313,19 +313,19 @@ public class GameManager : MonoBehaviour
         beatScoller = ns.GetComponent<BeatScroller>();
     }
 
-    public void SetGameMode(string mode) {
+    public void SetGameMode(GameMode mode) {
         switch (mode) {
-            case "ddr":
+            case GameMode.DDR:
                 ddrMode.SetActive(true);
                 piuMode.SetActive(false);
                 mixMode.SetActive(false);
                 break;
-            case "piu":
+            case GameMode.PIU:
                 ddrMode.SetActive(false);
                 piuMode.SetActive(true);
                 mixMode.SetActive(false);
                 break;
-            case "mix":
+            case GameMode.FULL:
                 ddrMode.SetActive(false);
                 piuMode.SetActive(false);
                 mixMode.SetActive(true);

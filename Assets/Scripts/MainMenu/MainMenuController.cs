@@ -261,6 +261,14 @@ public class MainMenuController : MonoBehaviour
         obj.transform.position = startPos;
         animatedObjects.AddLast(ao);
     }
+
+    public GameMode GetSelectedGameMode() {
+        return selectedGameMode;
+    }
+
+    public Difficulty GetSelectedDifficulty() {
+        return selectedDifficulty;
+    }
 }
 
 public class AnimatedObject {

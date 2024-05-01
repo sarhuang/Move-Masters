@@ -1,5 +1,5 @@
 Alphabet Song - Taiko no Tatsujin
-alphabet_song_easy
+alphabet_song
 TaikoTatsujin-ABC
 alphabet_song
 6

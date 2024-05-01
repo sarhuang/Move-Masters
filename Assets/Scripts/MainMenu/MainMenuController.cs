@@ -148,8 +148,8 @@ public class MainMenuController : MonoBehaviour
         selectedGameMode = gm;
 
         switch (gm) {
-            case GameMode.FULL:
-                ModeText.text = "Full";
+            case GameMode.MIX:
+                ModeText.text = "MIX";
                 break;
             case GameMode.DDR:
                 ModeText.text = "DDR";

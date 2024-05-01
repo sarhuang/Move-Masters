@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -81,7 +82,7 @@ public class SongPanel : MonoBehaviour
         //Create song selector object, change scene
         NoteSpawner ns;
         string filepath = $@"Song-Files/{songLocation.Trim()}";
-
+        Debug.Log(songLocation);
         if (songLocation == null) {
             Debug.LogError("SongPanel set up incorrectly!");
             return;
@@ -95,8 +96,20 @@ public class SongPanel : MonoBehaviour
 
         //TODO: Check if note spawner already exists, if it does change the song it loaded
         ns = Instantiate(MainMenuController.m.NoteSpawnerRef).GetComponent<NoteSpawner>();
-        ns.LoadSongFile(songLocation);
+        //ns.LoadSongFile(songLocation);
         ns.musicGameMode = MainMenuController.m.GetSelectedGameMode();
+        switch(ns.musicGameMode){
+            case GameMode.DDR:
+                songLocation = songLocation.Trim();
+                songLocation += "_ddr";
+                break;
+            case GameMode.PIU:
+                songLocation = songLocation.Trim();
+                songLocation += "_piu";
+                break;
+        }
+        Debug.Log("new song location: " + songLocation);
+        ns.LoadSongFile(songLocation);
         ns.difficulty = MainMenuController.m.GetSelectedDifficulty();
         MainMenuController.m.CleanUpEvents();
         DontDestroyOnLoad(ns.gameObject);

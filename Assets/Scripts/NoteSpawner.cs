@@ -41,7 +41,11 @@ public class NoteSpawner : MonoBehaviour
     public void LoadSpawnTimes()
     {
         // Load the text file containing timings from Resources folder
-        TextAsset timingTextAsset = Resources.Load<TextAsset>($@"song-files/{timingsFileName}");
+        //Debug.Log("timingsFileName hex: " + System.BitConverter.ToString(System.Text.Encoding.UTF8.GetBytes(timingsFileName)));
+        //Debug.Log("Expected hex: " + System.BitConverter.ToString(System.Text.Encoding.UTF8.GetBytes("alphabet_songddr")));
+        
+        TextAsset timingTextAsset = Resources.Load<TextAsset>($@"Song-Files/{timingsFileName}");
+        Debug.Log("trying to load timing: " + timingsFileName);
         if (timingTextAsset == null)
         {
             Debug.LogError("Failed to load timing text file.");
@@ -173,6 +177,7 @@ public class NoteSpawner : MonoBehaviour
 
     public void LoadSongFile(string timingsFile) {
         timingsFileName = timingsFile.Trim();
+        Debug.Log("notespawner: " + timingsFileName);
         LoadSpawnTimes();
     }
 
@@ -200,7 +205,7 @@ public enum Difficulty {
 }
 
 public enum GameMode {
-    FULL = 0,
+    MIX = 0,
     DDR,
     PIU
 }

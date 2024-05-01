@@ -325,7 +325,7 @@ public class GameManager : MonoBehaviour
                 piuMode.SetActive(true);
                 mixMode.SetActive(false);
                 break;
-            case GameMode.FULL:
+            case GameMode.MIX:
                 ddrMode.SetActive(false);
                 piuMode.SetActive(false);
                 mixMode.SetActive(true);

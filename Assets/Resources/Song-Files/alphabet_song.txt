@@ -1,116 +1,54 @@
 130.0
 alphabet_song
 mix
-5.189, Bottom_Left_Arrow
-6.067, Top_Left_Arrow
-6.981, Left_Arrow
-7.948, Down_Arrow
-8.875, Center_Button
-9.323, Down_Arrow
-9.739, Bottom_Right_Arrow
-10.699, Left_Arrow
-11.626, Up_Arrow
-12.565, Right_Arrow
-13.020, Down_Arrow
-13.442, Right_Arrow
-14.467, Down_Arrow
-15.378, Bottom_Right_Arrow
-16.289, Top_Left_Arrow
-16.731, Bottom_Left_Arrow
-17.194, Top_Right_Arrow
-17.688, Right_Arrow
-18.148, Up_Arrow
-19.056, Bottom_Left_Arrow
-20.000, Top_Right_Arrow
-20.408, Left_Arrow
-20.880, Top_Left_Arrow
-21.351, Bottom_Right_Arrow
-21.839, Down_Arrow
-22.798, Right_Arrow
-23.680, Bottom_Left_Arrow
-24.150, Top_Left_Arrow
-24.605, Up_Arrow
-25.558, Bottom_Right_Arrow
-26.502, Top_Right_Arrow
-27.414, Down_Arrow
-27.880, Right_Arrow
-28.356, Up_Arrow
-29.276, Left_Arrow
-30.196, Bottom_Left_Arrow
-31.164, Top_Right_Arrow
-33.015, Bottom_Right_Arrow
-34.812, Down_Arrow
-35.817, Top_Left_Arrow
-36.714, Up_Arrow
-37.656, Right_Arrow
-38.615, Left_Arrow
-39.079, Bottom_Right_Arrow
-39.536, Top_Right_Arrow
-40.470, Down_Arrow
-41.390, Top_Left_Arrow
-42.312, Bottom_Left_Arrow
-42.774, Right_Arrow
-43.205, Left_Arrow
-44.174, Down_Arrow
-45.084, Bottom_Right_Arrow
-46.028, Top_Right_Arrow
-46.501, Left_Arrow
-46.932, Bottom_Left_Arrow
-47.397, Up_Arrow
-47.893, Right_Arrow
-48.795, Down_Arrow
-49.770, Bottom_Right_Arrow
-50.260, Top_Left_Arrow
-50.693, Left_Arrow
-51.146, Bottom_Left_Arrow
-51.619, Right_Arrow
-52.521, Up_Arrow
-53.493, Down_Arrow
-53.953, Bottom_Right_Arrow
-54.400, Top_Left_Arrow
-55.345, Right_Arrow
-56.264, Bottom_Left_Arrow
-57.183, Up_Arrow
-57.655, Left_Arrow
-58.095, Down_Arrow
-59.025, Bottom_Right_Arrow
-60.886, Top_Left_Arrow
-61.829, Right_Arrow
-62.775, Bottom_Left_Arrow
-63.716, Top_Right_Arrow
-64.684, Up_Arrow
-68.330, Left_Arrow
-69.275, Down_Arrow
-70.233, Bottom_Right_Arrow
-71.168, Top_Left_Arrow
-72.064, Right_Arrow
-72.545, Bottom_Left_Arrow
-72.984, Up_Arrow
-73.943, Left_Arrow
-74.831, Down_Arrow
-75.799, Top_Right_Arrow
-76.273, Bottom_Right_Arrow
-76.719, Up_Arrow
-77.645, Left_Arrow
-78.598, Down_Arrow
-79.526, Top_Left_Arrow
-79.973, Right_Arrow
-80.460, Bottom_Left_Arrow
-80.917, Up_Arrow
-81.395, Left_Arrow
-82.308, Down_Arrow
-83.224, Top_Right_Arrow
-83.715, Bottom_Right_Arrow
-84.162, Up_Arrow
-84.595, Left_Arrow
-85.059, Down_Arrow
-85.993, Right_Arrow
-86.961, Bottom_Left_Arrow
-87.433, Up_Arrow
-87.849, Left_Arrow
-88.793, Down_Arrow
-89.664, Top_Right_Arrow
-90.640, Bottom_Right_Arrow
-91.176, Up_Arrow
-91.639, Right_Arrow
-92.479, Down_Arrow
+6.27,Bottom_Left_Arrow
+9.00,Top_Left_Arrow
+10.83,Left_Arrow 
+12.68,Down_Arrow 
+14.49,Center_Button
+16.39,Up_Arrow 
+18.24,Right_Arrow 
+20.18,Top_Right_Arrow 
+22.01,Bottom_Right_Arrow
+23.86,Top_Right_Arrow
+25.71,Center_Button
+27.58,Down_Arrow
+29.50,Right_Arrow
+31.27,Top_Left_Arrow
+34.48,Left_Arrow
+36.38,Top_Right_Arrow
+38.71,Bottom_Left_Arrow
+40.65,Down_Arrow
+42.41,Right_Arrow
+44.25,Bottom_Left_Arrow
+46.10,Top_Left_Arrow
+47.98,Bottom_Right_Arrow
+49.85,Center_Button
+51.69,Down_Arrow
+53.57,Right_Arrow
+55.50,Top_Left_Arrow
+57.27,Left_Arrow
+59.10,Top_Right_Arrow
+61.04,Center_Button
+63.76,Bottom_Left_Arrow
+67.02,Right_Arrow
+68.97,Bottom_Right_Arrow
+70.83,Down_Arrow
+72.68,Top_Right_Arrow
+74.06,Center_Button
+75.01,Bottom_Left_Arrow
+75.92,Down_Arrow
+77.76,Top_Left_Arrow
+78.64,Right_Arrow
+79.61,Top_Right_Arrow
+81.02,Bottom_Right_Arrow
+81.95,Center_Button
+82.93,Top_Left_Arrow
+83.84,Left_Arrow
+85.68,Bottom_Left_Arrow
+87.50,Down_Arrow
+88.45,Top_Right_Arrow
+89.34,Right_Arrow
+91.21,Bottom_Right_Arrow
+93.54,Center_Button
+94.46,Down_Arrow

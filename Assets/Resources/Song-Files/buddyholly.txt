@@ -1,6 +1,8 @@
 123
 Weezer_Buddy_Holly
 mix
+0.488,Up_Arrow
+0.976,Up_Arrow
 1.161,Bottom_Right_Arrow
 1.649,Left_Arrow
 3.111,Down_Arrow

@@ -41,6 +41,9 @@ public class ButtonController : MonoBehaviour
                 } else if (key != (KeyCode)keyToPress && !buttonPressed) {
                     Debug.Log(key + " key off");
                     spriteRenderer.sprite = defaultImage;
+                } else if (!buttonPressed) {
+                    //This should prevent the button from getting stuck down
+                    spriteRenderer.sprite = defaultImage;
                 }
             }
         }

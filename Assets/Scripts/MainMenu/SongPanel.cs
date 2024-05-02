@@ -99,13 +99,11 @@ public class SongPanel : MonoBehaviour
         //ns.LoadSongFile(songLocation);
         ns.musicGameMode = MainMenuController.m.GetSelectedGameMode();
         switch(ns.musicGameMode){
-            case GameMode.DDR:
-                songLocation = songLocation.Trim();
-                songLocation += "_ddr";
+            case GameMode.DDR:     
+                songLocation = songLocation.Trim() + "_ddr";
                 break;
             case GameMode.PIU:
-                songLocation = songLocation.Trim();
-                songLocation += "_piu";
+                songLocation = songLocation.Trim() + "_piu";
                 break;
         }
         Debug.Log("new song location: " + songLocation);

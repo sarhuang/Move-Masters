@@ -1,3 +1,9 @@
+top right = up
+top left = left
+bottom right = right
+bottom left = down
+center = up 
+
 160.0
 TestSong
 piu

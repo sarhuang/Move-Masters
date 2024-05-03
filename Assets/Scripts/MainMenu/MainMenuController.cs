@@ -56,12 +56,23 @@ public class MainMenuController : MonoBehaviour
         List<ButtonMap> pressed = e.buttons;
 
         foreach (ButtonMap b in pressed) {
+            print(b);
             switch (b) {
-                case ButtonMap.RIGHT_ARROW:
+                //case ButtonMap.RIGHT_ARROW:
+                case ButtonMap.UP_ARROW:
                     NextSong();
                     break;
-                case ButtonMap.LEFT_ARROW:
+                //case ButtonMap.LEFT_ARROW:
+                case ButtonMap.DOWN_ARROW:
                     PreviousSong();
+                    break;
+                //case ButtonMap.UP_ARROW:
+                case ButtonMap.RIGHT_ARROW:
+                    IncrementDifficulty();
+                    break;
+                //case ButtonMap.DOWN_ARROW:
+                case ButtonMap.TOP_LEFT_ARROW:
+                    IncrementGameMode();
                     break;
             }
         }
